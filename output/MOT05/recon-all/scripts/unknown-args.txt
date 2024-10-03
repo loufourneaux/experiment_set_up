@@ -1,0 +1,6 @@
+-all
+-subjid
+MOT05
+-openmp
+12
+-brainstem-structures

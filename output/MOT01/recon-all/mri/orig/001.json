@@ -1,0 +1,1 @@
+{"Origin function": "mri_convert data/MOTs/MOT01.nii output/MOT01/mri/orig/001.mgz", "Description": "Conversion of T1 for freesurfer", "Anat_filename": "output/MOT01/mri/orig/001.mgz", "Time": "Wed Jul 24 12:24:05 2024"}

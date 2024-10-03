@@ -1,0 +1,1 @@
+/opt/freesurfer/bin/segmentBS.sh /opt/freesurfer/MCRv80 /opt/freesurfer sub-MOT05 /data/MOTUS/Folder_lou/parcellation/output/freesurfer

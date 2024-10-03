@@ -1,0 +1,11 @@
+tqdm
+nibabel
+numpy
+matplotlib
+scikit-image
+plotly
+scipy
+kaleido
+pandas 
+xlrd
+openpyxl

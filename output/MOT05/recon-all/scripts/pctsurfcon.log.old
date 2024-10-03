@@ -1,0 +1,9 @@
+Logfile for pctsurfcon
+Fri Jul 12 22:37:57 CEST 2024
+setenv SUBJECTS_DIR /data/MOTUS/Folder_lou/parcellation/output/freesurfer
+cd /data/MOTUS/Folder_lou/parcellation/output/freesurfer/sub-MOT05/scripts
+/opt/freesurfer/bin/pctsurfcon
+$Id: pctsurfcon,v 1.15 2016/02/12 21:43:15 zkaufman Exp $
+Linux uphummelsrv2.epfl.ch 3.10.0-957.1.3.el7.x86_64 #1 SMP Thu Nov 29 14:49:43 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+FREESURFER_HOME /opt/freesurfer
+Cleaning up

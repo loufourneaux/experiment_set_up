@@ -1,0 +1,1 @@
+mris_inflate -rusage /data/MOTUS/Folder_lou/parcellation/output/freesurfer/sub-MOT05/touch/rusage.mris_inflate.lh.dat ../surf/lh.smoothwm ../surf/lh.inflated

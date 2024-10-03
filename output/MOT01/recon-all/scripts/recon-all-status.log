@@ -1,0 +1,77 @@
+status file for recon-all
+Wed Jul 24 12:24:06 CEST 2024
+#@# MotionCor Wed Jul 24 12:24:06 CEST 2024
+#@# Talairach Wed Jul 24 12:24:19 CEST 2024
+#@# Talairach Failure Detection Wed Jul 24 12:26:20 CEST 2024
+#@# Nu Intensity Correction Wed Jul 24 12:26:20 CEST 2024
+#@# Intensity Normalization Wed Jul 24 12:28:51 CEST 2024
+#@# Skull Stripping Wed Jul 24 12:30:58 CEST 2024
+#@# EM Registration Wed Jul 24 12:47:01 CEST 2024
+#@# CA Normalize Wed Jul 24 12:54:15 CEST 2024
+#@# CA Reg Wed Jul 24 12:56:10 CEST 2024
+#@# SubCort Seg Wed Jul 24 15:40:25 CEST 2024
+#@# Merge ASeg Wed Jul 24 16:20:22 CEST 2024
+#@# Intensity Normalization2 Wed Jul 24 16:20:22 CEST 2024
+#@# Mask BFS Wed Jul 24 16:22:30 CEST 2024
+#@# WM Segmentation Wed Jul 24 16:22:31 CEST 2024
+#@# Fill Wed Jul 24 16:24:08 CEST 2024
+#@# Tessellate lh Wed Jul 24 16:24:36 CEST 2024
+#@# Tessellate rh Wed Jul 24 16:24:40 CEST 2024
+#@# Smooth1 lh Wed Jul 24 16:24:44 CEST 2024
+#@# Smooth1 rh Wed Jul 24 16:24:49 CEST 2024
+#@# Inflation1 lh Wed Jul 24 16:24:54 CEST 2024
+#@# Inflation1 rh Wed Jul 24 16:25:09 CEST 2024
+#@# QSphere lh Wed Jul 24 16:25:25 CEST 2024
+#@# QSphere rh Wed Jul 24 16:27:09 CEST 2024
+#@# Fix Topology Copy lh Wed Jul 24 16:28:48 CEST 2024
+#@# Fix Topology Copy rh Wed Jul 24 16:28:48 CEST 2024
+#@# Fix Topology lh Wed Jul 24 16:28:48 CEST 2024
+#@# Fix Topology rh Wed Jul 24 16:39:15 CEST 2024
+#@# Make White Surf lh Wed Jul 24 16:54:39 CEST 2024
+#@# Make White Surf rh Wed Jul 24 16:58:26 CEST 2024
+#@# Smooth2 lh Wed Jul 24 17:02:12 CEST 2024
+#@# Smooth2 rh Wed Jul 24 17:02:16 CEST 2024
+#@# Inflation2 lh Wed Jul 24 17:02:21 CEST 2024
+#@# Inflation2 rh Wed Jul 24 17:02:35 CEST 2024
+#@# Curv .H and .K lh Wed Jul 24 17:02:51 CEST 2024
+#@# Curv .H and .K rh Wed Jul 24 17:03:48 CEST 2024
+#@# Curvature Stats lh Wed Jul 24 17:04:45 CEST 2024
+#@# Curvature Stats rh Wed Jul 24 17:04:49 CEST 2024
+#@# Sphere lh Wed Jul 24 17:04:52 CEST 2024
+#@# Sphere rh Wed Jul 24 17:14:52 CEST 2024
+#@# Surf Reg lh Wed Jul 24 17:23:27 CEST 2024
+#@# Surf Reg rh Wed Jul 24 17:40:41 CEST 2024
+#@# Jacobian white lh Wed Jul 24 18:01:48 CEST 2024
+#@# Jacobian white rh Wed Jul 24 18:01:49 CEST 2024
+#@# AvgCurv lh Wed Jul 24 18:01:51 CEST 2024
+#@# AvgCurv rh Wed Jul 24 18:01:52 CEST 2024
+#@# Cortical Parc lh Wed Jul 24 18:01:53 CEST 2024
+#@# Cortical Parc rh Wed Jul 24 18:02:04 CEST 2024
+#@# Make Pial Surf lh Wed Jul 24 18:02:14 CEST 2024
+#@# Make Pial Surf rh Wed Jul 24 18:12:52 CEST 2024
+#@# Surf Volume lh Wed Jul 24 18:24:11 CEST 2024
+#@# Surf Volume rh Wed Jul 24 18:24:14 CEST 2024
+#@# Cortical ribbon mask Wed Jul 24 18:24:17 CEST 2024
+#@# Parcellation Stats lh Wed Jul 24 18:30:43 CEST 2024
+#@# Parcellation Stats rh Wed Jul 24 18:31:30 CEST 2024
+#@# Cortical Parc 2 lh Wed Jul 24 18:32:19 CEST 2024
+#@# Cortical Parc 2 rh Wed Jul 24 18:32:32 CEST 2024
+#@# Parcellation Stats 2 lh Wed Jul 24 18:32:46 CEST 2024
+#@# Parcellation Stats 2 rh Wed Jul 24 18:33:10 CEST 2024
+#@# Cortical Parc 3 lh Wed Jul 24 18:33:34 CEST 2024
+#@# Cortical Parc 3 rh Wed Jul 24 18:33:45 CEST 2024
+#@# Parcellation Stats 3 lh Wed Jul 24 18:33:56 CEST 2024
+#@# Parcellation Stats 3 rh Wed Jul 24 18:34:20 CEST 2024
+#@# WM/GM Contrast lh Wed Jul 24 18:34:44 CEST 2024
+#@# WM/GM Contrast rh Wed Jul 24 18:34:49 CEST 2024
+#@# Relabel Hypointensities Wed Jul 24 18:34:54 CEST 2024
+#@# AParc-to-ASeg aparc Wed Jul 24 18:35:10 CEST 2024
+#@# AParc-to-ASeg a2009s Wed Jul 24 18:38:39 CEST 2024
+#@# AParc-to-ASeg DKTatlas Wed Jul 24 18:42:04 CEST 2024
+#@# APas-to-ASeg Wed Jul 24 18:45:30 CEST 2024
+#@# ASeg Stats Wed Jul 24 18:45:35 CEST 2024
+#@# WMParc Wed Jul 24 18:46:02 CEST 2024
+#@# BA_exvivo Labels lh Wed Jul 24 18:51:08 CEST 2024
+#@# BA_exvivo Labels rh Wed Jul 24 18:54:57 CEST 2024
+#@# Segmentation of brainstem substructures  Wed Jul 24 18:58:48 CEST 2024
+recon-all -s MOT01 finished without error at Wed Jul 24 19:13:49 CEST 2024

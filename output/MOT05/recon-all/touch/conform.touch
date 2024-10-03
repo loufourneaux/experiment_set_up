@@ -1,0 +1,1 @@
+mri_convert /data/MOTUS/Folder_lou/parcellation/output/freesurfer/sub-MOT05/mri/rawavg.mgz /data/MOTUS/Folder_lou/parcellation/output/freesurfer/sub-MOT05/mri/orig.mgz --conform

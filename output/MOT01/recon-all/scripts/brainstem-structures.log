@@ -1,0 +1,5551 @@
+#--------------------------------------------
+#@# Segmentation of brainstem substructures  Wed Jul 24 18:58:48 CEST 2024
+------------------------------------------
+Setting up environment variables
+---
+LD_LIBRARY_PATH is .:/opt/freesurfer/MCRv80/runtime/glnxa64:/opt/freesurfer/MCRv80/bin/glnxa64:/opt/freesurfer/MCRv80/sys/os/glnxa64:/opt/freesurfer/MCRv80/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/opt/freesurfer/MCRv80/sys/java/jre/glnxa64/jre/lib/amd64/server:/opt/freesurfer/MCRv80/sys/java/jre/glnxa64/jre/lib/amd64/client:/opt/freesurfer/MCRv80/sys/java/jre/glnxa64/jre/lib/amd64:
+Warning: application is running on a locale different from the original platform locale.
+Warning: No display specified.  You will not be able to display graphics on the screen.
+Registering imageDump.mgz to BS mask from ASEG
+$Id: mri_robust_register.cpp,v 1.77 2016/01/20 23:36:17 greve Exp $
+
+--mov: Using imageDump.mgz as movable/source volume.
+--dst: Using /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz as target volume.
+--lta: Output transform as trash.lta . 
+--mapmovhdr: Will save header adjusted movable as imageDump_coregistered.mgz !
+--sat: Using saturation 50 in M-estimator!
+
+reading source 'imageDump.mgz'...
+reading target '/data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz'...
+
+Registration::setSourceAndTarget(MRI s, MRI t, keeptype = TRUE )
+   Type Source : 4  Type Target : 4  keeping type 
+   Reordering axes in mov to better fit dst... ( -1 3 -2 )
+MRIreorder() -----------
+xdim=-1 ydim=3 zdim=-2
+src 65 55 93, 1.000000 1.000000 1.000000
+dst 65 93 55, 1.000000 1.000000 1.000000
+ Determinant after swap : 1
+   Mov: (1, 1, 1)mm  and dim (65, 93, 55)
+   Dst: (1, 1, 1)mm  and dim (50, 87, 43)
+   Asserting both images: 1mm isotropic 
+    - no Mov reslice necessary
+    - reslicing Dst ...
+       -- Original : (1, 1, 1)mm and (50, 87, 43) voxels.
+       -- Resampled: (1, 1, 1)mm and (65, 93, 55) voxels.
+       -- Reslicing using cubic bspline 
+MRItoBSpline degree 3
+
+
+ Registration::computeMultiresRegistration 
+   - computing centroids 
+   - computing initial transform
+     -- using translation info
+   - Get Gaussian Pyramid Limits ( min size: 16 max size: -1 ) 
+   - Build Gaussian Pyramid ( Limits min steps: 0 max steps: 1 ) 
+   - Build Gaussian Pyramid ( Limits min steps: 0 max steps: 1 ) 
+   - initial transform:
+Ti = [ ...
+ 1.0000000000000                0                0  0.9388518246258 
+               0  1.0000000000000                0 -2.8289391875980 
+               0                0  1.0000000000000 -0.6335744930938 
+               0                0                0  1.0000000000000  ]
+
+   - initial iscale:  Ii =1
+
+Resolution: 1  S( 32 46 27 )  T( 32 46 27 )
+ Iteration(f): 1
+     -- diff. to prev. transform: 9.9959
+ Iteration(f): 2
+     -- diff. to prev. transform: 0.446231
+ Iteration(f): 3
+     -- diff. to prev. transform: 0.0444557
+ Iteration(f): 4
+     -- diff. to prev. transform: 0.00415745  <= 0.01   :-)
+
+Resolution: 0  S( 65 93 55 )  T( 65 93 55 )
+ Iteration(f): 1
+     -- diff. to prev. transform: 0.455919
+ Iteration(f): 2
+     -- diff. to prev. transform: 0.129098
+ Iteration(f): 3
+     -- diff. to prev. transform: 0.0391251
+ Iteration(f): 4
+     -- diff. to prev. transform: 0.0139525
+ Iteration(f): 5
+     -- diff. to prev. transform: 0.00359364  <= 0.01   :-)
+
+   - final transform: 
+Tf = [ ...
+ 0.9996735916519 -0.0165625088600 -0.0194523380099  2.1297231616272 
+ 0.0192893466165  0.9885586672026  0.1495984044226 -7.1888830600183 
+ 0.0167520524384 -0.1499247971449  0.9885554733752  5.1558869901124 
+               0                0                0  1.0000000000000  ]
+
+   - final iscale:  If = 1
+
+Final Transform:
+Adjusting final transform due to initial resampling (voxel or size changes) ...
+M = [ ...
+-0.9996737108223 -0.0194523403288  0.0165625108344 57.0850880040188 
+-0.0192893466165  0.1495984044226 -0.9885586672026 81.9930322676586 
+-0.0167520524384  0.9885554733752  0.1499247971449 -13.5650629911626 
+               0                0                0  1.0000000000000  ]
+
+ Determinant : -1
+
+
+writing output transformation to trash.lta ...
+converting VOX to RAS and saving RAS2RAS...
+
+mapmovhdr: Changing vox2ras MOV header (to map to DST) ...
+
+To check aligned result, run:
+  freeview -v /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz imageDump_coregistered.mgz
+
+
+Registration took 0 minutes and 1 seconds.
+
+ Thank you for using RobustRegister! 
+ If you find it useful and use it for a publication, please cite: 
+
+ Highly Accurate Inverse Consistent Registration: A Robust Approach
+ M. Reuter, H.D. Rosas, B. Fischl.  NeuroImage 53(4):1181-1196, 2010.
+ http://dx.doi.org/10.1016/j.neuroimage.2010.07.020
+ http://reuter.mit.edu/papers/reuter-robreg10.pdf
+
+$Id: mri_robust_register.cpp,v 1.77 2016/01/20 23:36:17 greve Exp $
+
+--mov: Using imageDump.mgz as movable/source volume.
+--dst: Using /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz as target volume.
+--lta: Output transform as trash.lta . 
+--mapmovhdr: Will save header adjusted movable as imageDump_coregistered.mgz !
+--affine: Enableing affine transform!
+--sat: Using saturation 50 in M-estimator!
+
+reading source 'imageDump.mgz'...
+reading target '/data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz'...
+
+Registration::setSourceAndTarget(MRI s, MRI t, keeptype = TRUE )
+   Type Source : 4  Type Target : 4  keeping type 
+   Reordering axes in mov to better fit dst... ( -1 3 -2 )
+MRIreorder() -----------
+xdim=-1 ydim=3 zdim=-2
+src 65 55 93, 1.000000 1.000000 1.000000
+dst 65 93 55, 1.000000 1.000000 1.000000
+ Determinant after swap : 1
+   Mov: (1, 1, 1)mm  and dim (65, 93, 55)
+   Dst: (1, 1, 1)mm  and dim (50, 87, 43)
+   Asserting both images: 1mm isotropic 
+    - no Mov reslice necessary
+    - reslicing Dst ...
+       -- Original : (1, 1, 1)mm and (50, 87, 43) voxels.
+       -- Resampled: (1, 1, 1)mm and (65, 93, 55) voxels.
+       -- Reslicing using cubic bspline 
+MRItoBSpline degree 3
+
+
+ Registration::computeMultiresRegistration 
+   - computing centroids 
+   - computing initial transform
+     -- using translation info
+   - Get Gaussian Pyramid Limits ( min size: 16 max size: -1 ) 
+   - Build Gaussian Pyramid ( Limits min steps: 0 max steps: 1 ) 
+   - Build Gaussian Pyramid ( Limits min steps: 0 max steps: 1 ) 
+   - initial transform:
+Ti = [ ...
+ 1.0000000000000                0                0  0.9388518246258 
+               0  1.0000000000000                0 -2.8289391875980 
+               0                0  1.0000000000000 -0.6335744930938 
+               0                0                0  1.0000000000000  ]
+
+   - initial iscale:  Ii =1
+
+Resolution: 1  S( 32 46 27 )  T( 32 46 27 )
+ Iteration(f): 1
+     -- diff. to prev. transform: 12.2736
+ Iteration(f): 2
+     -- diff. to prev. transform: 1.41349
+ Iteration(f): 3
+     -- diff. to prev. transform: 0.119427
+ Iteration(f): 4
+     -- diff. to prev. transform: 0.0114606
+ Iteration(f): 5
+     -- diff. to prev. transform: 0.00131568  <= 0.01   :-)
+
+Resolution: 0  S( 65 93 55 )  T( 65 93 55 )
+ Iteration(f): 1
+     -- diff. to prev. transform: 1.52229
+ Iteration(f): 2
+     -- diff. to prev. transform: 0.341892
+ Iteration(f): 3
+     -- diff. to prev. transform: 0.087435
+ Iteration(f): 4
+     -- diff. to prev. transform: 0.0238685
+ Iteration(f): 5
+     -- diff. to prev. transform: 0.00744559  <= 0.01   :-)
+
+   - final transform: 
+Tf = [ ...
+ 1.0141245688473 -0.0127231383949 -0.0176170823776  1.4818637387002 
+-0.0062935720839  1.0792773780418  0.1891254372222 -10.8138458073319 
+ 0.0184392193358 -0.1618628659672  1.0890594063720  2.8000720171628 
+               0                0                0  1.0000000000000  ]
+
+   - final iscale:  If = 1
+
+Final Transform:
+Adjusting final transform due to initial resampling (voxel or size changes) ...
+M = [ ...
+-1.0141248105975 -0.0176170857174  0.0127231406700 57.7153208475346 
+ 0.0062935706918  0.1891254645774 -1.0792774423718 85.0768983624137 
+-0.0184392219931  1.0890594688731  0.1618628756150 -16.9112035667738 
+               0                0                0  1.0000000000000  ]
+
+ Determinant : -1.22325
+
+ Decompose into Rot * Shear * Scale : 
+
+Rot = [ ...
+-0.9998639980742 -0.0164147238930  0.0015944260981 
+-0.0041955460897  0.1596749771622 -0.9871607260529 
+-0.0159493808053  0.9870331597813  0.1597221297884  ]
+
+Shear = [ ...
+ 1.0000000000000 -0.0004962966626 -0.0098734785637 
+-0.0005409086089  1.0000000000000 -0.0117094257491 
+-0.0106234321563 -0.0115597307676  1.0000000000000  ]
+
+Scale = diag([  1.0142545768777  1.1054255925865  1.0912936729587  ])
+
+
+writing output transformation to trash.lta ...
+converting VOX to RAS and saving RAS2RAS...
+
+mapmovhdr: Changing vox2ras MOV header (to map to DST) ...
+
+To check aligned result, run:
+  freeview -v /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1//BS-DE-binaryMask_autoCropped.mgz imageDump_coregistered.mgz
+
+
+Registration took 0 minutes and 1 seconds.
+
+ Thank you for using RobustRegister! 
+ If you find it useful and use it for a publication, please cite: 
+
+ Highly Accurate Inverse Consistent Registration: A Robust Approach
+ M. Reuter, H.D. Rosas, B. Fischl.  NeuroImage 53(4):1181-1196, 2010.
+ http://dx.doi.org/10.1016/j.neuroimage.2010.07.020
+ http://reuter.mit.edu/papers/reuter-robreg10.pdf
+
+Reading contexts of file /opt/freesurfer/average/BrainstemSS/atlas/compressionLookupTable.txt
+Constructing image-to-world transform from header information (cheating.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd41d97ed90)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 422
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -1 0 -2.79397e-09 
+    -6.98492e-10 -2.98023e-08 1 
+    9.31323e-10 -1 2.98023e-08 
+  Offset: [127.953, -106.801, 98.3693]
+  Center: [0, 0, 0]
+  Translation: [127.953, -106.801, 98.3693]
+  Inverse: 
+    -1 -2.79397e-09 1.16226e-16 
+    -9.31323e-10 2.98023e-08 -1 
+    -6.98492e-10 1 -2.98023e-08 
+  Singular: 0
+Constructing image-to-world transform from header information (/data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1/imageDump.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd41d97ed90)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 579
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    1.01412 0.0176171 -0.0127231 
+    -0.0184392 1.08906 0.161863 
+    -0.00629357 -0.189125 1.07928 
+  Offset: [-32.7625, -39.7127, -87.7076]
+  Center: [0, 0, 0]
+  Translation: [-32.7625, -39.7127, -87.7076]
+  Inverse: 
+    0.98591 -0.0135765 0.0136586 
+    0.0154363 0.894703 -0.134 
+    0.00845407 0.156703 0.903144 
+  Singular: 0
+Transform before cropping: 
+AffineTransform (0x7fd41d97ed90)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 581
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -1.01412 -0.0176171 0.0127231 
+    0.00629357 0.189125 -1.07928 
+    -0.0184392 1.08906 0.161863 
+  Offset: [160.715, 186.077, 67.0888]
+  Center: [0, 0, 0]
+  Translation: [160.715, 186.077, 67.0888]
+  Inverse: 
+    -0.98591 -0.0136586 -0.0135766 
+    -0.0154363 0.134 0.894703 
+    -0.00845407 -0.903144 0.156703 
+  Singular: 0
+WorldToImageTransform before cropping: 
+AffineTransform (0x7fd41e28fc00)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 583
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -1 -2.79397e-09 1.16226e-16 
+    -9.31323e-10 2.98023e-08 -1 
+    -6.98492e-10 1 -2.98023e-08 
+  Offset: [127.953, 98.3693, 106.801]
+  Center: [0, 0, 0]
+  Translation: [127.953, 98.3693, 106.801]
+  Inverse: 
+    -1 -2.60209e-17 -2.79397e-09 
+    -6.98492e-10 -2.98023e-08 1 
+    9.31323e-10 -1 2.98023e-08 
+  Singular: 0
+ m_BoundingBoxSize: [65, 55,93]
+ minimalMappedCoordinate: [94.86, 86.7834,65.9087]
+ maximalMappedCoordinate: [161.886, 196.692,140.789]
+Cropping with min [88  75  58]
+          and max [168  208  148]
+m_OriginalImageRegion before checking margins: ImageRegion (0x7fd41e31add8)
+  Dimension: 3
+  Index: [88, 75, 58]
+  Size: [81, 134, 91]
+
+m_CroppedImageRegion before checking margins: ImageRegion (0x7fd41e31ada0)
+  Dimension: 3
+  Index: [0, 0, 0]
+  Size: [81, 134, 91]
+
+
+m_OriginalImageRegion after checking margins: ImageRegion (0x7fd41e31add8)
+  Dimension: 3
+  Index: [88, 75, 58]
+  Size: [81, 134, 91]
+
+m_CroppedImageRegion after checking margins: ImageRegion (0x7fd41e31ada0)
+  Dimension: 3
+  Index: [0, 0, 0]
+  Size: [81, 134, 91]
+
+Transform after cropping: 
+AffineTransform (0x7fd41d97ed90)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 740
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -1.01412 -0.0176171 0.0127231 
+    0.00629357 0.189125 -1.07928 
+    -0.0184392 1.08906 0.161863 
+  Offset: [72.7153, 111.077, 9.0888]
+  Center: [0, 0, 0]
+  Translation: [72.7153, 111.077, 9.0888]
+  Inverse: 
+    -0.98591 -0.0136586 -0.0135766 
+    -0.0154363 0.134 0.894703 
+    -0.00845407 -0.903144 0.156703 
+  Singular: 0
+WorldToImageTransform after cropping: 
+AffineTransform (0x7fd41e28fc00)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 741
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -1 -2.79397e-09 1.16226e-16 
+    -9.31323e-10 2.98023e-08 -1 
+    -6.98492e-10 1 -2.98023e-08 
+  Offset: [39.9528, 23.3693, 48.8015]
+  Center: [0, 0, 0]
+  Translation: [39.9528, 23.3693, 48.8015]
+  Inverse: 
+    -1 -2.60209e-17 -2.79397e-09 
+    -6.98492e-10 -2.98023e-08 1 
+    9.31323e-10 -1 2.98023e-08 
+  Singular: 0
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Careful here: the applied transformation will turn positive tetrahedra into negative ones.
+-1.01412 -0.0176171 0.0127231
+0.00629357 0.189125 -1.07928
+-0.0184392 1.08906 0.161863
+
+ determinant: -1.22325
+Starting to swap the point assignments of each tetrahedron...
+Warning: This concatenation operation includes an empty array with an incorrect number of rows.
+Concatenation including empty arrays will require all arrays to have the same number of rows in a future release.
+[> In segmentSubject at 264] 
+Reading contexts of file /opt/freesurfer/average/BrainstemSS/atlas/compressionLookupTable.txt
+--------------
+Making Left-VentralDC map to reduced label 1
+Making 4th-Ventricle map to reduced label 1
+Making Left-Cerebellum-White-Matter map to reduced label 1
+Making Left-Cerebellum-Cortex map to reduced label 1
+Making Medulla map to reduced label 1
+Making Pons map to reduced label 1
+Making SCP map to reduced label 1
+Making Midbrain map to reduced label 1
+--------------
+Making Left-Caudate map to reduced label 2
+Making Left-Accumbens-area map to reduced label 2
+Making Left-Pallidum map to reduced label 2
+Making 3rd-Ventricle map to reduced label 2
+Making Left-Putamen map to reduced label 2
+Making Left-Thalamus-Proper map to reduced label 2
+Making Left-Amygdala map to reduced label 2
+Making Left-Lateral-Ventricle map to reduced label 2
+Making Left-choroid-plexus map to reduced label 2
+Making Left-Hippocampus map to reduced label 2
+Making Left-Cerebral-White-Matter map to reduced label 2
+Making Left-Cerebral-Cortex map to reduced label 2
+Making Background map to reduced label 2
+numberOfLabels: 2
+Rasterizing mesh...here: 2
+here2: 2
+done
+Smoothing mesh with kernel size 3.000000 ...Smoothing class: 0
+Smoothing class: 1
+done
+numberOfImages = 1
+Image: 4
+numberOfClasses = 2
+numberOfImages = 1
+precisions[0][0][0] = 1.000000
+precisions[0][0][1] = 1.000000
+means[0][0] = 255.000000
+means[0][1] = 1.000000
+Iteration 1
+Did one deformation step of max. 1 voxels in 0.35409 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.6133e+05
+
+Iteration 2
+Did one deformation step of max. 1.2703 voxels in 0.17495 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.6023e+05
+
+Iteration 3
+Did one deformation step of max. 0.34465 voxels in 0.46867 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.6006e+05
+
+Iteration 4
+Did one deformation step of max. 0.24102 voxels in 0.17252 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5993e+05
+
+Iteration 5
+Did one deformation step of max. 0.2364 voxels in 0.17623 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5972e+05
+
+Iteration 6
+Did one deformation step of max. 0.52772 voxels in 0.17684 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5937e+05
+
+Iteration 7
+Did one deformation step of max. 0.60852 voxels in 0.18548 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5887e+05
+
+Iteration 8
+Did one deformation step of max. 0.47526 voxels in 0.24476 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5873e+05
+
+Iteration 9
+Did one deformation step of max. 0.53414 voxels in 0.17269 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5855e+05
+
+Iteration 10
+Did one deformation step of max. 0.38125 voxels in 0.18271 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5828e+05
+
+Iteration 11
+Did one deformation step of max. 0.60684 voxels in 0.18378 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5790e+05
+
+Iteration 12
+Did one deformation step of max. 0.47661 voxels in 0.35079 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5763e+05
+
+Iteration 13
+Did one deformation step of max. 0.99585 voxels in 0.17656 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5757e+05
+
+Iteration 14
+Did one deformation step of max. 0.1734 voxels in 0.17243 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5749e+05
+
+Iteration 15
+Did one deformation step of max. 0.43012 voxels in 0.17627 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5740e+05
+
+Iteration 16
+Did one deformation step of max. 0.44717 voxels in 0.17127 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5729e+05
+
+Iteration 17
+Did one deformation step of max. 0.32862 voxels in 0.35731 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5722e+05
+
+Iteration 18
+Did one deformation step of max. 0.5267 voxels in 0.20379 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5720e+05
+
+Iteration 19
+Did one deformation step of max. 0.091945 voxels in 0.18203 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5719e+05
+
+Iteration 20
+Did one deformation step of max. 0.053946 voxels in 0.17893 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5717e+05
+
+Iteration 21
+Did one deformation step of max. 0.22133 voxels in 0.17702 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5715e+05
+
+Iteration 22
+Did one deformation step of max. 0.1645 voxels in 0.17335 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5712e+05
+
+Iteration 23
+Did one deformation step of max. 0.2611 voxels in 0.17716 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5708e+05
+
+Iteration 24
+Did one deformation step of max. 0.25841 voxels in 0.17478 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5704e+05
+
+Iteration 25
+Did one deformation step of max. 0.37041 voxels in 0.17261 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5699e+05
+
+Iteration 26
+Did one deformation step of max. 0.20913 voxels in 0.17464 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5693e+05
+
+Iteration 27
+Did one deformation step of max. 0.35827 voxels in 0.17454 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5688e+05
+
+Iteration 28
+Did one deformation step of max. 0.20453 voxels in 0.17299 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5680e+05
+
+Iteration 29
+Did one deformation step of max. 0.31765 voxels in 0.35935 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5677e+05
+
+Iteration 30
+Did one deformation step of max. 0.26686 voxels in 0.17232 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5674e+05
+
+Iteration 31
+Did one deformation step of max. 0.24547 voxels in 0.17439 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5670e+05
+
+Iteration 32
+Did one deformation step of max. 0.28373 voxels in 0.17738 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5666e+05
+
+Iteration 33
+Did one deformation step of max. 0.47483 voxels in 0.17948 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5663e+05
+
+Iteration 34
+Did one deformation step of max. 0.14271 voxels in 0.18269 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5660e+05
+
+Iteration 35
+Did one deformation step of max. 0.42345 voxels in 0.17442 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5659e+05
+
+Iteration 36
+Did one deformation step of max. 0.072132 voxels in 0.17788 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5658e+05
+
+Iteration 37
+Did one deformation step of max. 0.12534 voxels in 0.17378 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5657e+05
+
+Iteration 38
+Did one deformation step of max. 0.041468 voxels in 0.18397 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 39
+Did one deformation step of max. 0.024897 voxels in 0.91341 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 40
+Did one deformation step of max. 0.0030549 voxels in 0.17975 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 41
+Did one deformation step of max. 0.0011638 voxels in 1.7927 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 42
+Did one deformation step of max. 1.5503e-05 voxels in 0.24824 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 43
+Did one deformation step of max. 4.4434e-05 voxels in 0.24594 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 44
+Did one deformation step of max. 5.31e-05 voxels in 0.24858 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 45
+Did one deformation step of max. 0.00019116 voxels in 0.18336 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 46
+Did one deformation step of max. 0.0002143 voxels in 0.17597 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 47
+Did one deformation step of max. 0.0012469 voxels in 0.17591 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 48
+Did one deformation step of max. 0.00081629 voxels in 0.17726 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 49
+Did one deformation step of max. 0.0050971 voxels in 0.17785 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 50
+Did one deformation step of max. 0.0030884 voxels in 0.18078 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 51
+Did one deformation step of max. 0.020786 voxels in 0.17774 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 52
+Did one deformation step of max. 0.010153 voxels in 0.17714 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5656e+05
+
+Iteration 53
+Did one deformation step of max. 0.08252 voxels in 0.1774 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5655e+05
+
+Iteration 54
+Did one deformation step of max. 0.018179 voxels in 0.18424 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5655e+05
+
+Iteration 55
+Did one deformation step of max. 0.1213 voxels in 0.18695 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5655e+05
+
+Iteration 56
+Did one deformation step of max. 0.033133 voxels in 0.17802 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5654e+05
+
+Iteration 57
+Did one deformation step of max. 0.13993 voxels in 0.17675 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5653e+05
+
+Iteration 58
+Did one deformation step of max. 0.056993 voxels in 0.18076 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5652e+05
+
+Iteration 59
+Did one deformation step of max. 0.1618 voxels in 0.35676 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5652e+05
+
+Iteration 60
+Did one deformation step of max. 0.030141 voxels in 0.1779 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5652e+05
+
+Iteration 61
+Did one deformation step of max. 0.02288 voxels in 0.89962 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5652e+05
+
+Iteration 62
+Did one deformation step of max. 0.0033821 voxels in 0.17874 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5652e+05
+
+Iteration 63
+Did one deformation step of max. 0.012652 voxels in 0.18162 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5651e+05
+
+Iteration 64
+Did one deformation step of max. 0.016455 voxels in 0.17789 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5651e+05
+
+Iteration 65
+Did one deformation step of max. 0.056772 voxels in 0.17784 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5651e+05
+
+Iteration 66
+Did one deformation step of max. 0.027644 voxels in 0.18091 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5651e+05
+
+Iteration 67
+Did one deformation step of max. 0.047069 voxels in 0.17741 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5650e+05
+
+Iteration 68
+Did one deformation step of max. 0.083123 voxels in 0.17637 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5649e+05
+
+Iteration 69
+Did one deformation step of max. 0.20473 voxels in 0.17715 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5647e+05
+
+Iteration 70
+Did one deformation step of max. 0.19572 voxels in 0.18121 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5645e+05
+
+Iteration 71
+Did one deformation step of max. 0.17979 voxels in 0.35746 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5645e+05
+
+Iteration 72
+Did one deformation step of max. 0.065812 voxels in 0.17825 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5644e+05
+
+Iteration 73
+Did one deformation step of max. 0.12578 voxels in 0.35487 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5643e+05
+
+Iteration 74
+Did one deformation step of max. 0.07164 voxels in 0.18096 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5642e+05
+
+Iteration 75
+Did one deformation step of max. 0.099789 voxels in 0.17966 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5642e+05
+
+Iteration 76
+Did one deformation step of max. 0.19987 voxels in 0.21274 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5640e+05
+
+Iteration 77
+Did one deformation step of max. 0.18004 voxels in 0.17675 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5639e+05
+
+Iteration 78
+Did one deformation step of max. 0.13725 voxels in 0.18052 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5638e+05
+
+Iteration 79
+Did one deformation step of max. 0.12626 voxels in 0.17594 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5636e+05
+
+Iteration 80
+Did one deformation step of max. 0.20199 voxels in 0.17622 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5634e+05
+
+Iteration 81
+Did one deformation step of max. 0.18044 voxels in 0.1766 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5630e+05
+
+Iteration 82
+Did one deformation step of max. 0.23492 voxels in 0.36126 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5629e+05
+
+Iteration 83
+Did one deformation step of max. 0.25842 voxels in 0.18144 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5628e+05
+
+Iteration 84
+Did one deformation step of max. 0.090392 voxels in 0.17909 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5628e+05
+
+Iteration 85
+Did one deformation step of max. 0.13679 voxels in 0.17681 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5627e+05
+
+Iteration 86
+Did one deformation step of max. 0.13627 voxels in 0.18159 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5626e+05
+
+Iteration 87
+Did one deformation step of max. 0.068015 voxels in 0.18102 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5626e+05
+
+Iteration 88
+Did one deformation step of max. 0.07186 voxels in 0.35754 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 89
+Did one deformation step of max. 0.099878 voxels in 0.17699 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 90
+Did one deformation step of max. 0.043405 voxels in 0.17814 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 91
+Did one deformation step of max. 0.053341 voxels in 0.18962 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 92
+Did one deformation step of max. 0.023873 voxels in 0.37831 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 93
+Did one deformation step of max. 0.024814 voxels in 0.17617 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 94
+Did one deformation step of max. 0.023698 voxels in 0.1739 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 95
+Did one deformation step of max. 0.029987 voxels in 0.17368 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5625e+05
+
+Iteration 96
+Did one deformation step of max. 0.023575 voxels in 0.1778 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 97
+Did one deformation step of max. 0.045967 voxels in 0.17275 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 98
+Did one deformation step of max. 0.040899 voxels in 0.17323 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 99
+Did one deformation step of max. 0.058512 voxels in 0.17231 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 100
+Did one deformation step of max. 0.056236 voxels in 0.17348 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 101
+Did one deformation step of max. 0.039804 voxels in 0.18484 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5624e+05
+
+Iteration 102
+Did one deformation step of max. 0.06585 voxels in 0.17398 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 103
+Did one deformation step of max. 0.053393 voxels in 0.178 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 104
+Did one deformation step of max. 0.047824 voxels in 0.17185 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 105
+Did one deformation step of max. 0.047665 voxels in 0.17414 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 106
+Did one deformation step of max. 0.065002 voxels in 0.17247 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 107
+Did one deformation step of max. 0.025314 voxels in 0.17708 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 108
+Did one deformation step of max. 0.045035 voxels in 0.17402 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5623e+05
+
+Iteration 109
+Did one deformation step of max. 0.031191 voxels in 0.35045 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 110
+Did one deformation step of max. 0.019295 voxels in 0.1732 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 111
+Did one deformation step of max. 0.021692 voxels in 0.17652 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 112
+Did one deformation step of max. 0.019175 voxels in 0.17397 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 113
+Did one deformation step of max. 0.026216 voxels in 0.1736 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 114
+Did one deformation step of max. 0.023779 voxels in 0.17279 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 115
+Did one deformation step of max. 0.029491 voxels in 0.17716 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 116
+Did one deformation step of max. 0.035156 voxels in 0.17302 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 117
+Did one deformation step of max. 0.038286 voxels in 0.17273 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 118
+Did one deformation step of max. 0.0351 voxels in 0.1725 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 119
+Did one deformation step of max. 0.026455 voxels in 0.1765 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 120
+Did one deformation step of max. 0.037355 voxels in 0.18474 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 121
+Did one deformation step of max. 0.023424 voxels in 0.17411 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 122
+Did one deformation step of max. 0.039629 voxels in 0.17324 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 123
+Did one deformation step of max. 0.035107 voxels in 0.17643 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 124
+Did one deformation step of max. 0.018783 voxels in 0.17201 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5622e+05
+
+Iteration 125
+Did one deformation step of max. 0.024285 voxels in 0.17265 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 126
+Did one deformation step of max. 0.048874 voxels in 0.1727 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 127
+Did one deformation step of max. 0.0089643 voxels in 0.17669 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 128
+Did one deformation step of max. 0.015463 voxels in 0.17321 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 129
+Did one deformation step of max. 0.019802 voxels in 0.17345 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 130
+Did one deformation step of max. 0.0070621 voxels in 0.17241 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 131
+Did one deformation step of max. 0.014496 voxels in 0.17723 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 132
+Did one deformation step of max. 0.014001 voxels in 0.35277 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 133
+Did one deformation step of max. 0.0045683 voxels in 0.17261 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 134
+Did one deformation step of max. 0.0075221 voxels in 0.17323 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 135
+Did one deformation step of max. 0.0089143 voxels in 0.17678 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 136
+Did one deformation step of max. 0.0051075 voxels in 0.1727 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 137
+Did one deformation step of max. 0.0097271 voxels in 0.17392 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 138
+Did one deformation step of max. 0.0065435 voxels in 0.17742 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 139
+Did one deformation step of max. 0.011752 voxels in 0.17668 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 140
+Did one deformation step of max. 0.021106 voxels in 0.17225 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 141
+Did one deformation step of max. 0.017218 voxels in 0.17302 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 142
+Did one deformation step of max. 0.019878 voxels in 0.18803 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 143
+Did one deformation step of max. 0.022988 voxels in 0.17757 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 144
+Did one deformation step of max. 0.033291 voxels in 0.17378 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 145
+Did one deformation step of max. 0.014099 voxels in 0.17401 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 146
+Did one deformation step of max. 0.018617 voxels in 0.17311 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 147
+Did one deformation step of max. 0.027682 voxels in 0.17792 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 148
+Did one deformation step of max. 0.036574 voxels in 0.1736 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 149
+Did one deformation step of max. 0.015473 voxels in 0.17281 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 150
+Did one deformation step of max. 0.0181 voxels in 0.17267 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 151
+Did one deformation step of max. 0.04012 voxels in 0.17206 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 152
+Did one deformation step of max. 0.00099817 voxels in 0.17362 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 153
+Did one deformation step of max. 0.0013717 voxels in 0.17327 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 154
+Did one deformation step of max. 0.0049302 voxels in 0.18038 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 155
+Did one deformation step of max. 0.0042286 voxels in 0.17939 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 156
+Did one deformation step of max. 0.0079406 voxels in 0.17233 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 157
+Did one deformation step of max. 0.012389 voxels in 0.17196 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 158
+Did one deformation step of max. 0.023093 voxels in 0.1726 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 159
+Did one deformation step of max. 0.00026341 voxels in 0.17621 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 160
+Did one deformation step of max. 0.00020908 voxels in 0.35092 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 161
+Did one deformation step of max. 0.00050618 voxels in 0.17361 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 162
+Did one deformation step of max. 0.00095905 voxels in 0.17304 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 163
+Did one deformation step of max. 0.001857 voxels in 0.17721 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 164
+Did one deformation step of max. 0.0040176 voxels in 0.17226 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 165
+Did one deformation step of max. 0.0081789 voxels in 0.17305 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 166
+Did one deformation step of max. 0.0068461 voxels in 0.17425 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 167
+Did one deformation step of max. 0.0057218 voxels in 0.17722 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 168
+Did one deformation step of max. 0.0045562 voxels in 0.17467 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 169
+Did one deformation step of max. 0.0063542 voxels in 0.17432 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 170
+Did one deformation step of max. 0.0070471 voxels in 0.17262 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 171
+Did one deformation step of max. 0.0017929 voxels in 0.17776 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 172
+Did one deformation step of max. 0.0026513 voxels in 0.17278 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 173
+Did one deformation step of max. 0.0065009 voxels in 0.1731 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 174
+Did one deformation step of max. 0.0019443 voxels in 0.17234 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 175
+Did one deformation step of max. 0.0024843 voxels in 0.17647 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 176
+Did one deformation step of max. 0.004645 voxels in 0.17232 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 177
+Did one deformation step of max. 0.0039472 voxels in 0.17328 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 178
+Did one deformation step of max. 0.0017858 voxels in 0.17353 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 179
+Did one deformation step of max. 0.0027774 voxels in 0.17283 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 180
+Did one deformation step of max. 0.003084 voxels in 0.17441 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 181
+Did one deformation step of max. 0.0036639 voxels in 0.17644 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 182
+Did one deformation step of max. 0.0022944 voxels in 0.17423 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 183
+Did one deformation step of max. 0.0029701 voxels in 0.17834 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 184
+Did one deformation step of max. 0.0047225 voxels in 0.17316 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 185
+Did one deformation step of max. 0.0036608 voxels in 0.17527 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 186
+Did one deformation step of max. 0.0045686 voxels in 0.17636 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 187
+Did one deformation step of max. 0.0070315 voxels in 0.17721 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 188
+Did one deformation step of max. 0.0053805 voxels in 0.17217 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 189
+Did one deformation step of max. 0.0064684 voxels in 0.17318 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 190
+Did one deformation step of max. 0.0069488 voxels in 0.17322 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 191
+Did one deformation step of max. 0.0093584 voxels in 0.17285 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 192
+Did one deformation step of max. 0.0084462 voxels in 0.17273 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 193
+Did one deformation step of max. 0.0082544 voxels in 0.17354 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 194
+Did one deformation step of max. 0.015254 voxels in 0.17335 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 195
+Did one deformation step of max. 0.010924 voxels in 0.17723 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 196
+Did one deformation step of max. 0.0069917 voxels in 0.17386 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 197
+Did one deformation step of max. 0.015823 voxels in 0.17233 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 198
+Did one deformation step of max. 0.0044919 voxels in 0.17264 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 199
+Did one deformation step of max. 0.0035619 voxels in 0.17814 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Iteration 200
+Did one deformation step of max. 0.007741 voxels in 0.17614 seconds
+
+minLogLikelihoodTimesPrior =
+
+   2.5621e+05
+
+Fitting mesh to synthetic image from ASEG took 41.3955 seconds
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Careful here: the applied transformation will turn positive tetrahedra into negative ones.
+-0.98591 -0.0136586 -0.0135766
+-0.0154363 0.134 0.894703
+-0.00845407 -0.903144 0.156703
+
+ determinant: -0.817497
+Starting to swap the point assignments of each tetrahedron...
+Constructing image-to-world transform from header information (T1resampled.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd300147620)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28527442
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -0.5 0 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Offset: [43.9528, -31.8015, 9.36928]
+  Center: [0, 0, 0]
+  Translation: [43.9528, -31.8015, 9.36928]
+  Inverse: 
+    -2 -5.58794e-09 1.45717e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Singular: 0
+Constructing image-to-world transform from header information (/data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1/imageDump.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd300199a20)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28530052
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    1.01412 0.0176171 -0.0127231 
+    -0.0184392 1.08906 0.161863 
+    -0.00629357 -0.189125 1.07928 
+  Offset: [-32.7625, -39.7127, -87.7076]
+  Center: [0, 0, 0]
+  Translation: [-32.7625, -39.7127, -87.7076]
+  Inverse: 
+    0.98591 -0.0135765 0.0136586 
+    0.0154363 0.894703 -0.134 
+    0.00845407 0.156703 0.903144 
+  Singular: 0
+Transform before cropping: 
+AffineTransform (0x7fd300199a20)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28530054
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2.02825 -0.0352342 0.0254463 
+    0.0125871 0.378251 -2.15855 
+    -0.0368784 2.17812 0.323726 
+  Offset: [153.431, 194.154, -15.8224]
+  Center: [0, 0, 0]
+  Translation: [153.431, 194.154, -15.8224]
+  Inverse: 
+    -0.492955 -0.0068293 -0.00678828 
+    -0.00771813 0.0669999 0.447352 
+    -0.00422704 -0.451572 0.0783514 
+  Singular: 0
+WorldToImageTransform before cropping: 
+AffineTransform (0x7fd3001b8cf0)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28530056
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2 -5.58794e-09 1.45717e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Offset: [87.9056, 18.7386, 63.6029]
+  Center: [0, 0, 0]
+  Translation: [87.9056, 18.7386, 63.6029]
+  Inverse: 
+    -0.5 1.73472e-18 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Singular: 0
+ m_BoundingBoxSize: [65, 55,93]
+ minimalMappedCoordinate: [21.7201, -4.43328,-18.1826]
+ maximalMappedCoordinate: [155.772, 215.385,131.579]
+Cropping with min [8  -26  -33]
+          and max [169  238  147]
+m_OriginalImageRegion before checking margins: ImageRegion (0x7fd3001b25a8)
+  Dimension: 3
+  Index: [8, -26, -33]
+  Size: [162, 265, 181]
+
+m_CroppedImageRegion before checking margins: ImageRegion (0x7fd3001b2570)
+  Dimension: 3
+  Index: [0, 0, 0]
+  Size: [162, 265, 181]
+
+
+m_OriginalImageRegion after checking margins: ImageRegion (0x7fd3001b25a8)
+  Dimension: 3
+  Index: [8, 0, 0]
+  Size: [162, 216, 144]
+
+m_CroppedImageRegion after checking margins: ImageRegion (0x7fd3001b2570)
+  Dimension: 3
+  Index: [0, 26, 33]
+  Size: [162, 216, 144]
+
+Transform after cropping: 
+AffineTransform (0x7fd300199a20)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28532666
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2.02825 -0.0352342 0.0254463 
+    0.0125871 0.378251 -2.15855 
+    -0.0368784 2.17812 0.323726 
+  Offset: [145.431, 220.154, 17.1776]
+  Center: [0, 0, 0]
+  Translation: [145.431, 220.154, 17.1776]
+  Inverse: 
+    -0.492955 -0.0068293 -0.00678828 
+    -0.00771813 0.0669999 0.447352 
+    -0.00422704 -0.451572 0.0783514 
+  Singular: 0
+WorldToImageTransform after cropping: 
+AffineTransform (0x7fd3001b8cf0)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 28532667
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2 -5.58794e-09 1.45717e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Offset: [79.9056, 44.7386, 96.6029]
+  Center: [0, 0, 0]
+  Translation: [79.9056, 44.7386, 96.6029]
+  Inverse: 
+    -0.5 1.73472e-18 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Singular: 0
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Careful here: the applied transformation will turn positive tetrahedra into negative ones.
+-2.02825 -0.0352342 0.0254463
+0.0125871 0.378251 -2.15855
+-0.0368784 2.17812 0.323726
+
+ determinant: -9.78596
+Starting to swap the point assignments of each tetrahedron...
+numberOfLabels: 21
+Rasterizing mesh...here: 21
+here2: 21
+done
+Warning: This concatenation operation includes an empty array with an incorrect number of rows.
+Concatenation including empty arrays will require all arrays to have the same number of rows in a future release.
+[> In segmentSubject at 582] 
+Reading contexts of file /opt/freesurfer/average/BrainstemSS/atlas/compressionLookupTable.txt
+--------------
+Making Left-VentralDC map to reduced label 1
+Making Medulla map to reduced label 1
+Making Pons map to reduced label 1
+Making SCP map to reduced label 1
+Making Midbrain map to reduced label 1
+--------------
+Making 3rd-Ventricle map to reduced label 2
+Making Left-Lateral-Ventricle map to reduced label 2
+Making 4th-Ventricle map to reduced label 2
+--------------
+Making Left-Amygdala map to reduced label 3
+Making Left-Cerebral-Cortex map to reduced label 3
+Making Left-Hippocampus map to reduced label 3
+--------------
+Making Left-Caudate map to reduced label 4
+--------------
+Making Left-Accumbens-area map to reduced label 5
+--------------
+Making Left-Pallidum map to reduced label 6
+--------------
+Making Left-Putamen map to reduced label 7
+--------------
+Making Left-Thalamus-Proper map to reduced label 8
+--------------
+Making Left-choroid-plexus map to reduced label 9
+--------------
+Making Left-Cerebral-White-Matter map to reduced label 10
+--------------
+Making Background map to reduced label 11
+--------------
+Making Left-Cerebellum-White-Matter map to reduced label 12
+--------------
+Making Left-Cerebellum-Cortex map to reduced label 13
+Computing hyperparameters for estimation of Gaussian parameters
+Smoothing mesh collection with kernel size 2.000000 ...Smoothing class: 0
+Smoothing class: 1
+Smoothing class: 2
+Smoothing class: 3
+Smoothing class: 4
+Smoothing class: 5
+Smoothing class: 6
+Smoothing class: 7
+Smoothing class: 8
+Smoothing class: 9
+Smoothing class: 10
+Smoothing class: 11
+Smoothing class: 12
+done
+numberOfImages = 1
+Image: 0
+Iteration 1 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   8.3690e+06
+
+
+minLogLikelihood =
+
+   8.1076e+06
+
+
+minLogLikelihood =
+
+   8.0383e+06
+
+
+minLogLikelihood =
+
+   8.0177e+06
+
+
+minLogLikelihood =
+
+   8.0114e+06
+
+
+minLogLikelihood =
+
+   8.0094e+06
+
+
+minLogLikelihood =
+
+   8.0086e+06
+
+
+minLogLikelihood =
+
+   8.0083e+06
+
+
+minLogLikelihood =
+
+   8.0081e+06
+
+
+minLogLikelihood =
+
+   8.0080e+06
+
+
+minLogLikelihood =
+
+   8.0080e+06
+
+EM converged!
+
+ans =
+
+   83.3629
+   48.9405
+   66.0503
+   86.0213
+   72.3081
+   95.2523
+   82.4316
+   87.1402
+   61.7634
+   97.2822
+   33.0775
+   82.2653
+   64.7380
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0278
+    4.3748
+    0.0447
+    0.2057
+    0.0037
+    0.0034
+    0.0246
+    0.0220
+    2.6529
+    0.0591
+    0.9393
+    0.0076
+    0.0137
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.018960
+precisions[0][0][1] = 0.001512
+precisions[0][0][2] = 0.014956
+precisions[0][0][3] = 0.006972
+precisions[0][0][4] = 0.051839
+precisions[0][0][5] = 0.054178
+precisions[0][0][6] = 0.020163
+precisions[0][0][7] = 0.021306
+precisions[0][0][8] = 0.001942
+precisions[0][0][9] = 0.013013
+precisions[0][0][10] = 0.003263
+precisions[0][0][11] = 0.036209
+precisions[0][0][12] = 0.026994
+means[0][0] = 83.362854
+means[0][1] = 48.940487
+means[0][2] = 66.050331
+means[0][3] = 86.021278
+means[0][4] = 72.308128
+means[0][5] = 95.252304
+means[0][6] = 82.431549
+means[0][7] = 87.140190
+means[0][8] = 61.763359
+means[0][9] = 97.282219
+means[0][10] = 33.077499
+means[0][11] = 82.265297
+means[0][12] = 64.738037
+Resolution level 1 iteration 1 deformation iterations 1
+Did one deformation step of max. 1 voxels in 3.1326 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9926e+06
+
+Resolution level 1 iteration 1 deformation iterations 2
+Did one deformation step of max. 1.8666 voxels in 1.5746 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9758e+06
+
+Resolution level 1 iteration 1 deformation iterations 3
+Did one deformation step of max. 0.24353 voxels in 3.3679 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9723e+06
+
+Resolution level 1 iteration 1 deformation iterations 4
+Did one deformation step of max. 0.22595 voxels in 6.1179 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9722e+06
+
+Resolution level 1 iteration 1 deformation iterations 5
+Did one deformation step of max. 0.0012126 voxels in 1.5197 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9722e+06
+
+Resolution level 1 iteration 1 deformation iterations 6
+Did one deformation step of max. 0.005205 voxels in 1.5528 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9722e+06
+
+Resolution level 1 iteration 1 deformation iterations 7
+Did one deformation step of max. 0.010731 voxels in 1.544 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9721e+06
+
+Resolution level 1 iteration 1 deformation iterations 8
+Did one deformation step of max. 0.092999 voxels in 1.5358 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9720e+06
+
+Resolution level 1 iteration 1 deformation iterations 9
+Did one deformation step of max. 0.028455 voxels in 1.524 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9717e+06
+
+Resolution level 1 iteration 1 deformation iterations 10
+Did one deformation step of max. 0.19008 voxels in 4.6004 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9717e+06
+
+Resolution level 1 iteration 1 deformation iterations 11
+Did one deformation step of max. 0.0055852 voxels in 1.543 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9716e+06
+
+Resolution level 1 iteration 1 deformation iterations 12
+Did one deformation step of max. 0.012176 voxels in 1.575 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9715e+06
+
+Resolution level 1 iteration 1 deformation iterations 13
+Did one deformation step of max. 0.012527 voxels in 1.5599 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9713e+06
+
+Resolution level 1 iteration 1 deformation iterations 14
+Did one deformation step of max. 0.047851 voxels in 1.5661 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9709e+06
+
+Resolution level 1 iteration 1 deformation iterations 15
+Did one deformation step of max. 0.068505 voxels in 1.5455 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9701e+06
+
+Resolution level 1 iteration 1 deformation iterations 16
+Did one deformation step of max. 0.35645 voxels in 1.5675 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9687e+06
+
+Resolution level 1 iteration 1 deformation iterations 17
+Did one deformation step of max. 0.20315 voxels in 1.5293 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9658e+06
+
+Resolution level 1 iteration 1 deformation iterations 18
+Did one deformation step of max. 1.4435 voxels in 1.5737 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9614e+06
+
+Resolution level 1 iteration 1 deformation iterations 19
+Did one deformation step of max. 0.49521 voxels in 1.582 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9528e+06
+
+Resolution level 1 iteration 1 deformation iterations 20
+Did one deformation step of max. 0.62678 voxels in 1.9773 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9449e+06
+
+Iteration 2 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.9365e+06
+
+
+minLogLikelihood =
+
+   7.9356e+06
+
+
+minLogLikelihood =
+
+   7.9353e+06
+
+
+minLogLikelihood =
+
+   7.9352e+06
+
+
+minLogLikelihood =
+
+   7.9351e+06
+
+EM converged!
+
+ans =
+
+   83.3579
+   46.7767
+   66.2048
+   85.0252
+   72.4566
+   95.2713
+   82.1723
+   87.0380
+   62.8681
+   97.6240
+   33.0657
+   82.4332
+   64.8564
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0261
+    3.2914
+    0.0433
+    0.1885
+    0.0037
+    0.0032
+    0.0201
+    0.0207
+    2.3117
+    0.0501
+    0.9071
+    0.0068
+    0.0132
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.019590
+precisions[0][0][1] = 0.001743
+precisions[0][0][2] = 0.015204
+precisions[0][0][3] = 0.007283
+precisions[0][0][4] = 0.051838
+precisions[0][0][5] = 0.056002
+precisions[0][0][6] = 0.022283
+precisions[0][0][7] = 0.021980
+precisions[0][0][8] = 0.002080
+precisions[0][0][9] = 0.014132
+precisions[0][0][10] = 0.003320
+precisions[0][0][11] = 0.038319
+precisions[0][0][12] = 0.027545
+means[0][0] = 83.357948
+means[0][1] = 46.776699
+means[0][2] = 66.204758
+means[0][3] = 85.025223
+means[0][4] = 72.456589
+means[0][5] = 95.271339
+means[0][6] = 82.172333
+means[0][7] = 87.038002
+means[0][8] = 62.868099
+means[0][9] = 97.623955
+means[0][10] = 33.065670
+means[0][11] = 82.433182
+means[0][12] = 64.856361
+Resolution level 1 iteration 2 deformation iterations 1
+Did one deformation step of max. 1 voxels in 3.165 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9349e+06
+
+Resolution level 1 iteration 2 deformation iterations 2
+Did one deformation step of max. 1.0734 voxels in 1.5582 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9190e+06
+
+Resolution level 1 iteration 2 deformation iterations 3
+Did one deformation step of max. 1.799 voxels in 2.1488 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.9059e+06
+
+Resolution level 1 iteration 2 deformation iterations 4
+Did one deformation step of max. 1.8857 voxels in 1.5826 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8865e+06
+
+Resolution level 1 iteration 2 deformation iterations 5
+Did one deformation step of max. 1.8349 voxels in 1.8519 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8701e+06
+
+Resolution level 1 iteration 2 deformation iterations 6
+Did one deformation step of max. 1.2903 voxels in 2.3941 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8630e+06
+
+Resolution level 1 iteration 2 deformation iterations 7
+Did one deformation step of max. 1.2194 voxels in 1.5695 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8507e+06
+
+Resolution level 1 iteration 2 deformation iterations 8
+Did one deformation step of max. 0.6312 voxels in 1.6755 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8451e+06
+
+Resolution level 1 iteration 2 deformation iterations 9
+Did one deformation step of max. 0.85214 voxels in 1.7891 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8407e+06
+
+Resolution level 1 iteration 2 deformation iterations 10
+Did one deformation step of max. 0.68505 voxels in 1.9543 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8373e+06
+
+Resolution level 1 iteration 2 deformation iterations 11
+Did one deformation step of max. 0.62967 voxels in 1.5743 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8365e+06
+
+Resolution level 1 iteration 2 deformation iterations 12
+Did one deformation step of max. 0.62357 voxels in 1.5673 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8354e+06
+
+Resolution level 1 iteration 2 deformation iterations 13
+Did one deformation step of max. 0.45168 voxels in 1.5807 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8331e+06
+
+Resolution level 1 iteration 2 deformation iterations 14
+Did one deformation step of max. 0.77959 voxels in 1.579 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8291e+06
+
+Resolution level 1 iteration 2 deformation iterations 15
+Did one deformation step of max. 0.58596 voxels in 1.6002 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8253e+06
+
+Resolution level 1 iteration 2 deformation iterations 16
+Did one deformation step of max. 0.70055 voxels in 1.9205 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8218e+06
+
+Resolution level 1 iteration 2 deformation iterations 17
+Did one deformation step of max. 0.60266 voxels in 1.609 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8187e+06
+
+Resolution level 1 iteration 2 deformation iterations 18
+Did one deformation step of max. 1.252 voxels in 1.5642 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8136e+06
+
+Resolution level 1 iteration 2 deformation iterations 19
+Did one deformation step of max. 1.9421 voxels in 1.5766 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8067e+06
+
+Resolution level 1 iteration 2 deformation iterations 20
+Did one deformation step of max. 1.5015 voxels in 1.7471 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.8042e+06
+
+Iteration 3 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.7423e+06
+
+
+minLogLikelihood =
+
+   7.7328e+06
+
+
+minLogLikelihood =
+
+   7.7308e+06
+
+
+minLogLikelihood =
+
+   7.7300e+06
+
+
+minLogLikelihood =
+
+   7.7295e+06
+
+
+minLogLikelihood =
+
+   7.7291e+06
+
+
+minLogLikelihood =
+
+   7.7287e+06
+
+
+minLogLikelihood =
+
+   7.7284e+06
+
+
+minLogLikelihood =
+
+   7.7282e+06
+
+
+minLogLikelihood =
+
+   7.7280e+06
+
+
+minLogLikelihood =
+
+   7.7280e+06
+
+
+minLogLikelihood =
+
+   7.7279e+06
+
+EM converged!
+
+ans =
+
+   83.0953
+   39.8587
+   66.7237
+   76.6394
+   73.0238
+   95.4567
+   82.2779
+   86.6045
+   73.6562
+   98.2034
+   33.1402
+   82.8693
+   65.2069
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0220
+    1.0055
+    0.0414
+    0.0333
+    0.0044
+    0.0025
+    0.0129
+    0.0165
+    0.1014
+    0.0340
+    0.8426
+    0.0052
+    0.0124
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021326
+precisions[0][0][1] = 0.003154
+precisions[0][0][2] = 0.015537
+precisions[0][0][3] = 0.017317
+precisions[0][0][4] = 0.047740
+precisions[0][0][5] = 0.062879
+precisions[0][0][6] = 0.027836
+precisions[0][0][7] = 0.024626
+precisions[0][0][8] = 0.009930
+precisions[0][0][9] = 0.017153
+precisions[0][0][10] = 0.003445
+precisions[0][0][11] = 0.044033
+precisions[0][0][12] = 0.028449
+means[0][0] = 83.095322
+means[0][1] = 39.858734
+means[0][2] = 66.723732
+means[0][3] = 76.639442
+means[0][4] = 73.023827
+means[0][5] = 95.456680
+means[0][6] = 82.277870
+means[0][7] = 86.604515
+means[0][8] = 73.656158
+means[0][9] = 98.203354
+means[0][10] = 33.140175
+means[0][11] = 82.869247
+means[0][12] = 65.206856
+Resolution level 1 iteration 3 deformation iterations 1
+Did one deformation step of max. 1 voxels in 3.2125 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7886e+06
+
+Resolution level 1 iteration 3 deformation iterations 2
+Did one deformation step of max. 0.44673 voxels in 1.5469 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7876e+06
+
+Resolution level 1 iteration 3 deformation iterations 3
+Did one deformation step of max. 0.80991 voxels in 1.5508 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7865e+06
+
+Resolution level 1 iteration 3 deformation iterations 4
+Did one deformation step of max. 0.87248 voxels in 1.5502 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7854e+06
+
+Resolution level 1 iteration 3 deformation iterations 5
+Did one deformation step of max. 0.40872 voxels in 1.553 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7851e+06
+
+Resolution level 1 iteration 3 deformation iterations 6
+Did one deformation step of max. 0.096269 voxels in 1.5541 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7848e+06
+
+Resolution level 1 iteration 3 deformation iterations 7
+Did one deformation step of max. 0.079023 voxels in 1.5815 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7846e+06
+
+Resolution level 1 iteration 3 deformation iterations 8
+Did one deformation step of max. 0.16306 voxels in 1.565 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7844e+06
+
+Resolution level 1 iteration 3 deformation iterations 9
+Did one deformation step of max. 0.24369 voxels in 1.5787 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7842e+06
+
+Resolution level 1 iteration 3 deformation iterations 10
+Did one deformation step of max. 0.21756 voxels in 1.5492 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7838e+06
+
+Resolution level 1 iteration 3 deformation iterations 11
+Did one deformation step of max. 0.49669 voxels in 1.5532 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7836e+06
+
+Resolution level 1 iteration 3 deformation iterations 12
+Did one deformation step of max. 0.10997 voxels in 3.1397 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7836e+06
+
+Resolution level 1 iteration 3 deformation iterations 13
+Did one deformation step of max. 0.0025138 voxels in 1.599 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 14
+Did one deformation step of max. 0.004123 voxels in 9.4428 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 15
+Did one deformation step of max. 3.16e-05 voxels in 1.5717 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 16
+Did one deformation step of max. 0.0011619 voxels in 6.2164 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 17
+Did one deformation step of max. 7.8095e-06 voxels in 1.5549 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 18
+Did one deformation step of max. 0.0010229 voxels in 4.6744 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 19
+Did one deformation step of max. 4.4149e-07 voxels in 1.5667 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Resolution level 1 iteration 3 deformation iterations 20
+Did one deformation step of max. 0.00044467 voxels in 1.569 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7835e+06
+
+Iteration 4 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.7232e+06
+
+
+minLogLikelihood =
+
+   7.7230e+06
+
+
+minLogLikelihood =
+
+   7.7230e+06
+
+EM converged!
+
+ans =
+
+   83.0729
+   39.4723
+   66.7649
+   75.8503
+   73.0940
+   95.4808
+   82.3077
+   86.5429
+   74.0863
+   98.2271
+   33.1870
+   82.9006
+   65.2293
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2189
+    9.4042
+    0.4170
+    0.3019
+    0.0441
+    0.0250
+    0.1275
+    0.1657
+    0.7608
+    0.3326
+    8.4740
+    0.0507
+    0.1237
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021375
+precisions[0][0][1] = 0.003261
+precisions[0][0][2] = 0.015485
+precisions[0][0][3] = 0.018201
+precisions[0][0][4] = 0.047637
+precisions[0][0][5] = 0.063229
+precisions[0][0][6] = 0.028005
+precisions[0][0][7] = 0.024564
+precisions[0][0][8] = 0.011465
+precisions[0][0][9] = 0.017340
+precisions[0][0][10] = 0.003435
+precisions[0][0][11] = 0.044419
+precisions[0][0][12] = 0.028431
+means[0][0] = 83.072929
+means[0][1] = 39.472256
+means[0][2] = 66.764938
+means[0][3] = 75.850296
+means[0][4] = 73.093987
+means[0][5] = 95.480789
+means[0][6] = 82.307663
+means[0][7] = 86.542854
+means[0][8] = 74.086266
+means[0][9] = 98.227135
+means[0][10] = 33.186981
+means[0][11] = 82.900558
+means[0][12] = 65.229279
+Resolution level 1 iteration 4 deformation iterations 1
+Did one deformation step of max. 0.5 voxels in 3.7865 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7828e+06
+
+Resolution level 1 iteration 4 deformation iterations 2
+Did one deformation step of max. 0.69519 voxels in 1.5575 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7823e+06
+
+Resolution level 1 iteration 4 deformation iterations 3
+Did one deformation step of max. 0.53135 voxels in 1.5746 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7821e+06
+
+Resolution level 1 iteration 4 deformation iterations 4
+Did one deformation step of max. 0.25203 voxels in 1.5871 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7817e+06
+
+Resolution level 1 iteration 4 deformation iterations 5
+Did one deformation step of max. 0.39053 voxels in 1.5751 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7813e+06
+
+Resolution level 1 iteration 4 deformation iterations 6
+Did one deformation step of max. 0.33944 voxels in 1.5784 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7808e+06
+
+Resolution level 1 iteration 4 deformation iterations 7
+Did one deformation step of max. 0.9068 voxels in 3.1173 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7805e+06
+
+Resolution level 1 iteration 4 deformation iterations 8
+Did one deformation step of max. 0.41173 voxels in 1.5751 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7800e+06
+
+Resolution level 1 iteration 4 deformation iterations 9
+Did one deformation step of max. 0.66762 voxels in 1.5677 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7792e+06
+
+Resolution level 1 iteration 4 deformation iterations 10
+Did one deformation step of max. 0.94569 voxels in 1.5657 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7781e+06
+
+Resolution level 1 iteration 4 deformation iterations 11
+Did one deformation step of max. 0.34887 voxels in 1.6595 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7777e+06
+
+Resolution level 1 iteration 4 deformation iterations 12
+Did one deformation step of max. 0.49786 voxels in 1.5576 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7770e+06
+
+Resolution level 1 iteration 4 deformation iterations 13
+Did one deformation step of max. 0.79355 voxels in 1.5989 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7766e+06
+
+Resolution level 1 iteration 4 deformation iterations 14
+Did one deformation step of max. 0.13124 voxels in 3.7194 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7766e+06
+
+Resolution level 1 iteration 4 deformation iterations 15
+Did one deformation step of max. 0.044505 voxels in 1.5728 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7765e+06
+
+Resolution level 1 iteration 4 deformation iterations 16
+Did one deformation step of max. 0.094821 voxels in 1.6622 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7764e+06
+
+Resolution level 1 iteration 4 deformation iterations 17
+Did one deformation step of max. 0.10979 voxels in 1.6475 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7761e+06
+
+Resolution level 1 iteration 4 deformation iterations 18
+Did one deformation step of max. 0.30722 voxels in 1.6886 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7759e+06
+
+Resolution level 1 iteration 4 deformation iterations 19
+Did one deformation step of max. 0.25062 voxels in 3.1068 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7757e+06
+
+Resolution level 1 iteration 4 deformation iterations 20
+Did one deformation step of max. 0.15204 voxels in 2.7388 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7756e+06
+
+Iteration 5 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.7129e+06
+
+
+minLogLikelihood =
+
+   7.7128e+06
+
+
+minLogLikelihood =
+
+   7.7127e+06
+
+EM converged!
+
+ans =
+
+   83.0197
+   39.1047
+   66.8353
+   75.1285
+   73.1976
+   95.5388
+   82.3866
+   86.4807
+   74.4386
+   98.2499
+   33.2603
+   82.9372
+   65.2548
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2148
+    8.7996
+    0.4185
+    0.2716
+    0.0446
+    0.0246
+    0.1227
+    0.1637
+    0.5720
+    0.3221
+    8.5551
+    0.0497
+    0.1237
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021579
+precisions[0][0][1] = 0.003371
+precisions[0][0][2] = 0.015458
+precisions[0][0][3] = 0.019189
+precisions[0][0][4] = 0.047357
+precisions[0][0][5] = 0.063817
+precisions[0][0][6] = 0.028553
+precisions[0][0][7] = 0.024714
+precisions[0][0][8] = 0.013222
+precisions[0][0][9] = 0.017619
+precisions[0][0][10] = 0.003419
+precisions[0][0][11] = 0.044854
+precisions[0][0][12] = 0.028431
+means[0][0] = 83.019676
+means[0][1] = 39.104691
+means[0][2] = 66.835335
+means[0][3] = 75.128540
+means[0][4] = 73.197632
+means[0][5] = 95.538803
+means[0][6] = 82.386589
+means[0][7] = 86.480751
+means[0][8] = 74.438614
+means[0][9] = 98.249916
+means[0][10] = 33.260269
+means[0][11] = 82.937202
+means[0][12] = 65.254814
+Resolution level 1 iteration 5 deformation iterations 1
+Did one deformation step of max. 0.5 voxels in 4.9876 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7750e+06
+
+Resolution level 1 iteration 5 deformation iterations 2
+Did one deformation step of max. 0.32235 voxels in 1.5609 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7746e+06
+
+Resolution level 1 iteration 5 deformation iterations 3
+Did one deformation step of max. 0.51342 voxels in 1.5291 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7740e+06
+
+Resolution level 1 iteration 5 deformation iterations 4
+Did one deformation step of max. 0.21215 voxels in 3.385 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7739e+06
+
+Resolution level 1 iteration 5 deformation iterations 5
+Did one deformation step of max. 0.057054 voxels in 1.5691 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7738e+06
+
+Resolution level 1 iteration 5 deformation iterations 6
+Did one deformation step of max. 0.016019 voxels in 1.554 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7738e+06
+
+Resolution level 1 iteration 5 deformation iterations 7
+Did one deformation step of max. 0.22243 voxels in 1.5652 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7736e+06
+
+Resolution level 1 iteration 5 deformation iterations 8
+Did one deformation step of max. 0.067433 voxels in 1.5591 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 9
+Did one deformation step of max. 0.055057 voxels in 7.8671 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 10
+Did one deformation step of max. 0.0081014 voxels in 1.5447 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 11
+Did one deformation step of max. 0.0078809 voxels in 1.5732 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 12
+Did one deformation step of max. 0.033633 voxels in 1.5493 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 13
+Did one deformation step of max. 0.035567 voxels in 1.571 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 14
+Did one deformation step of max. 0.23654 voxels in 1.5594 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 15
+Did one deformation step of max. 0.016979 voxels in 1.5782 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7735e+06
+
+Resolution level 1 iteration 5 deformation iterations 16
+Did one deformation step of max. 0.14721 voxels in 1.5456 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7734e+06
+
+Resolution level 1 iteration 5 deformation iterations 17
+Did one deformation step of max. 0.043102 voxels in 1.5776 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7734e+06
+
+Resolution level 1 iteration 5 deformation iterations 18
+Did one deformation step of max. 0.17601 voxels in 1.5389 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7733e+06
+
+Resolution level 1 iteration 5 deformation iterations 19
+Did one deformation step of max. 0.16368 voxels in 1.5501 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7731e+06
+
+Resolution level 1 iteration 5 deformation iterations 20
+Did one deformation step of max. 0.25692 voxels in 1.5764 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7729e+06
+
+Iteration 6 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.7087e+06
+
+
+minLogLikelihood =
+
+   7.7086e+06
+
+EM converged!
+
+ans =
+
+   82.9954
+   39.0093
+   66.8667
+   74.9300
+   73.2380
+   95.5653
+   82.4166
+   86.4719
+   74.5525
+   98.2569
+   33.3026
+   82.9517
+   65.2645
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2126
+    8.6470
+    0.4187
+    0.2620
+    0.0449
+    0.0244
+    0.1208
+    0.1627
+    0.5184
+    0.3177
+    8.6236
+    0.0493
+    0.1237
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021687
+precisions[0][0][1] = 0.003401
+precisions[0][0][2] = 0.015454
+precisions[0][0][3] = 0.019536
+precisions[0][0][4] = 0.047170
+precisions[0][0][5] = 0.064030
+precisions[0][0][6] = 0.028768
+precisions[0][0][7] = 0.024793
+precisions[0][0][8] = 0.013889
+precisions[0][0][9] = 0.017741
+precisions[0][0][10] = 0.003405
+precisions[0][0][11] = 0.045024
+precisions[0][0][12] = 0.028431
+means[0][0] = 82.995354
+means[0][1] = 39.009254
+means[0][2] = 66.866699
+means[0][3] = 74.929977
+means[0][4] = 73.238045
+means[0][5] = 95.565262
+means[0][6] = 82.416641
+means[0][7] = 86.471931
+means[0][8] = 74.552490
+means[0][9] = 98.256920
+means[0][10] = 33.302574
+means[0][11] = 82.951729
+means[0][12] = 65.264511
+Resolution level 1 iteration 6 deformation iterations 1
+Did one deformation step of max. 0.25 voxels in 5.5484 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7726e+06
+
+Resolution level 1 iteration 6 deformation iterations 2
+Did one deformation step of max. 0.23087 voxels in 1.586 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 3
+Did one deformation step of max. 0.30813 voxels in 2.791 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 4
+Did one deformation step of max. 0.1992 voxels in 1.5648 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 5
+Did one deformation step of max. 0.0038326 voxels in 1.5578 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 6
+Did one deformation step of max. 0.008042 voxels in 1.5581 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 7
+Did one deformation step of max. 0.018814 voxels in 1.5769 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 8
+Did one deformation step of max. 0.031672 voxels in 1.5466 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7724e+06
+
+Resolution level 1 iteration 6 deformation iterations 9
+Did one deformation step of max. 0.068182 voxels in 1.5634 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7723e+06
+
+Resolution level 1 iteration 6 deformation iterations 10
+Did one deformation step of max. 0.14775 voxels in 1.5686 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7723e+06
+
+Resolution level 1 iteration 6 deformation iterations 11
+Did one deformation step of max. 0.21656 voxels in 1.5692 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7722e+06
+
+Resolution level 1 iteration 6 deformation iterations 12
+Did one deformation step of max. 0.15497 voxels in 1.5688 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7721e+06
+
+Resolution level 1 iteration 6 deformation iterations 13
+Did one deformation step of max. 0.21673 voxels in 1.57 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7718e+06
+
+Resolution level 1 iteration 6 deformation iterations 14
+Did one deformation step of max. 0.39257 voxels in 1.5442 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7715e+06
+
+Resolution level 1 iteration 6 deformation iterations 15
+Did one deformation step of max. 0.66625 voxels in 1.5707 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7710e+06
+
+Resolution level 1 iteration 6 deformation iterations 16
+Did one deformation step of max. 0.46737 voxels in 2.688 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7707e+06
+
+Resolution level 1 iteration 6 deformation iterations 17
+Did one deformation step of max. 0.45235 voxels in 1.5564 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7704e+06
+
+Resolution level 1 iteration 6 deformation iterations 18
+Did one deformation step of max. 0.38456 voxels in 2.2073 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7703e+06
+
+Resolution level 1 iteration 6 deformation iterations 19
+Did one deformation step of max. 0.20092 voxels in 1.5492 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7702e+06
+
+Resolution level 1 iteration 6 deformation iterations 20
+Did one deformation step of max. 0.032903 voxels in 1.5864 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7702e+06
+
+Iteration 7 of 7
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.7023e+06
+
+
+minLogLikelihood =
+
+   7.7022e+06
+
+
+minLogLikelihood =
+
+   7.7022e+06
+
+EM converged!
+
+ans =
+
+   82.9383
+   38.9092
+   66.9356
+   74.6667
+   73.2755
+   95.6167
+   82.4547
+   86.4854
+   74.7784
+   98.2726
+   33.4175
+   82.9842
+   65.2869
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2065
+    8.4852
+    0.4182
+    0.2478
+    0.0456
+    0.0242
+    0.1175
+    0.1605
+    0.4409
+    0.3093
+    8.7924
+    0.0485
+    0.1236
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.022006
+precisions[0][0][1] = 0.003433
+precisions[0][0][2] = 0.015463
+precisions[0][0][3] = 0.020087
+precisions[0][0][4] = 0.046823
+precisions[0][0][5] = 0.064286
+precisions[0][0][6] = 0.029170
+precisions[0][0][7] = 0.024958
+precisions[0][0][8] = 0.015060
+precisions[0][0][9] = 0.017980
+precisions[0][0][10] = 0.003372
+precisions[0][0][11] = 0.045396
+precisions[0][0][12] = 0.028441
+means[0][0] = 82.938255
+means[0][1] = 38.909222
+means[0][2] = 66.935646
+means[0][3] = 74.666687
+means[0][4] = 73.275505
+means[0][5] = 95.616661
+means[0][6] = 82.454697
+means[0][7] = 86.485405
+means[0][8] = 74.778427
+means[0][9] = 98.272614
+means[0][10] = 33.417545
+means[0][11] = 82.984207
+means[0][12] = 65.286873
+Resolution level 1 iteration 7 deformation iterations 1
+Did one deformation step of max. 0.25 voxels in 5.885 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7698e+06
+
+Resolution level 1 iteration 7 deformation iterations 2
+Did one deformation step of max. 0.37112 voxels in 1.5644 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7698e+06
+
+Resolution level 1 iteration 7 deformation iterations 3
+Did one deformation step of max. 0.13872 voxels in 1.5852 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7697e+06
+
+Resolution level 1 iteration 7 deformation iterations 4
+Did one deformation step of max. 0.16917 voxels in 1.5527 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7697e+06
+
+Resolution level 1 iteration 7 deformation iterations 5
+Did one deformation step of max. 0.16602 voxels in 3.1451 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7696e+06
+
+Resolution level 1 iteration 7 deformation iterations 6
+Did one deformation step of max. 0.10779 voxels in 1.5527 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7696e+06
+
+Resolution level 1 iteration 7 deformation iterations 7
+Did one deformation step of max. 0.13789 voxels in 1.5464 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7696e+06
+
+Resolution level 1 iteration 7 deformation iterations 8
+Did one deformation step of max. 0.12112 voxels in 1.5699 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7696e+06
+
+Resolution level 1 iteration 7 deformation iterations 9
+Did one deformation step of max. 0.14382 voxels in 1.5471 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7695e+06
+
+Resolution level 1 iteration 7 deformation iterations 10
+Did one deformation step of max. 0.19526 voxels in 1.5663 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7695e+06
+
+Resolution level 1 iteration 7 deformation iterations 11
+Did one deformation step of max. 0.23868 voxels in 1.572 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7694e+06
+
+Resolution level 1 iteration 7 deformation iterations 12
+Did one deformation step of max. 0.28274 voxels in 1.5565 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7694e+06
+
+Resolution level 1 iteration 7 deformation iterations 13
+Did one deformation step of max. 0.18783 voxels in 1.5683 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7693e+06
+
+Resolution level 1 iteration 7 deformation iterations 14
+Did one deformation step of max. 0.33947 voxels in 1.5564 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7693e+06
+
+Resolution level 1 iteration 7 deformation iterations 15
+Did one deformation step of max. 0.15564 voxels in 1.5694 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Resolution level 1 iteration 7 deformation iterations 16
+Did one deformation step of max. 0.29794 voxels in 1.5333 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Resolution level 1 iteration 7 deformation iterations 17
+Did one deformation step of max. 0.11335 voxels in 1.5448 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Resolution level 1 iteration 7 deformation iterations 18
+Did one deformation step of max. 0.063314 voxels in 1.5606 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Resolution level 1 iteration 7 deformation iterations 19
+Did one deformation step of max. 0.11468 voxels in 3.1438 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Resolution level 1 iteration 7 deformation iterations 20
+Did one deformation step of max. 0.0057185 voxels in 1.5342 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7692e+06
+
+Smoothing mesh collection with kernel size 1.000000 ...Smoothing class: 0
+Smoothing class: 1
+Smoothing class: 2
+Smoothing class: 3
+Smoothing class: 4
+Smoothing class: 5
+Smoothing class: 6
+Smoothing class: 7
+Smoothing class: 8
+Smoothing class: 9
+Smoothing class: 10
+Smoothing class: 11
+Smoothing class: 12
+done
+numberOfImages = 1
+Image: 0
+Iteration 1 of 5
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6820e+06
+
+
+minLogLikelihood =
+
+   7.6818e+06
+
+
+minLogLikelihood =
+
+   7.6818e+06
+
+EM converged!
+
+ans =
+
+   82.9466
+   39.1373
+   66.9511
+   74.6634
+   73.4128
+   95.6067
+   82.4706
+   86.4661
+   75.1656
+   98.1956
+   33.6567
+   83.0043
+   65.2941
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2106
+    8.8949
+    0.4214
+    0.2608
+    0.0494
+    0.0260
+    0.1252
+    0.1667
+    0.4958
+    0.3233
+    9.2819
+    0.0483
+    0.1264
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021789
+precisions[0][0][1] = 0.003353
+precisions[0][0][2] = 0.015404
+precisions[0][0][3] = 0.019582
+precisions[0][0][4] = 0.045008
+precisions[0][0][5] = 0.062040
+precisions[0][0][6] = 0.028257
+precisions[0][0][7] = 0.024490
+precisions[0][0][8] = 0.014202
+precisions[0][0][9] = 0.017587
+precisions[0][0][10] = 0.003282
+precisions[0][0][11] = 0.045485
+precisions[0][0][12] = 0.028126
+means[0][0] = 82.946556
+means[0][1] = 39.137344
+means[0][2] = 66.951126
+means[0][3] = 74.663391
+means[0][4] = 73.412796
+means[0][5] = 95.606720
+means[0][6] = 82.470627
+means[0][7] = 86.466087
+means[0][8] = 75.165596
+means[0][9] = 98.195648
+means[0][10] = 33.656723
+means[0][11] = 83.004288
+means[0][12] = 65.294128
+Resolution level 2 iteration 1 deformation iterations 1
+Did one deformation step of max. 0.25 voxels in 5.9021 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7484e+06
+
+Resolution level 2 iteration 1 deformation iterations 2
+Did one deformation step of max. 0.30648 voxels in 1.6373 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7481e+06
+
+Resolution level 2 iteration 1 deformation iterations 3
+Did one deformation step of max. 0.42418 voxels in 1.6234 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7479e+06
+
+Resolution level 2 iteration 1 deformation iterations 4
+Did one deformation step of max. 0.44167 voxels in 1.6519 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7477e+06
+
+Resolution level 2 iteration 1 deformation iterations 5
+Did one deformation step of max. 0.42864 voxels in 1.6339 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7477e+06
+
+Resolution level 2 iteration 1 deformation iterations 6
+Did one deformation step of max. 0.05605 voxels in 1.6375 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7477e+06
+
+Resolution level 2 iteration 1 deformation iterations 7
+Did one deformation step of max. 0.081609 voxels in 1.6485 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7477e+06
+
+Resolution level 2 iteration 1 deformation iterations 8
+Did one deformation step of max. 0.1416 voxels in 1.6403 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7476e+06
+
+Resolution level 2 iteration 1 deformation iterations 9
+Did one deformation step of max. 0.11892 voxels in 1.6311 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7475e+06
+
+Resolution level 2 iteration 1 deformation iterations 10
+Did one deformation step of max. 0.26631 voxels in 1.6317 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7475e+06
+
+Resolution level 2 iteration 1 deformation iterations 11
+Did one deformation step of max. 0.2643 voxels in 1.6222 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7474e+06
+
+Resolution level 2 iteration 1 deformation iterations 12
+Did one deformation step of max. 0.18674 voxels in 1.6468 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7474e+06
+
+Resolution level 2 iteration 1 deformation iterations 13
+Did one deformation step of max. 0.16125 voxels in 1.6317 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7474e+06
+
+Resolution level 2 iteration 1 deformation iterations 14
+Did one deformation step of max. 0.067973 voxels in 1.6609 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7473e+06
+
+Resolution level 2 iteration 1 deformation iterations 15
+Did one deformation step of max. 0.10669 voxels in 3.311 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7473e+06
+
+Resolution level 2 iteration 1 deformation iterations 16
+Did one deformation step of max. 0.095749 voxels in 1.6389 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7473e+06
+
+Resolution level 2 iteration 1 deformation iterations 17
+Did one deformation step of max. 0.087561 voxels in 1.6319 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7473e+06
+
+Resolution level 2 iteration 1 deformation iterations 18
+Did one deformation step of max. 0.096357 voxels in 1.626 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7472e+06
+
+Resolution level 2 iteration 1 deformation iterations 19
+Did one deformation step of max. 0.16802 voxels in 1.6292 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7472e+06
+
+Resolution level 2 iteration 1 deformation iterations 20
+Did one deformation step of max. 0.18426 voxels in 1.6272 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7472e+06
+
+Iteration 2 of 5
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6745e+06
+
+
+minLogLikelihood =
+
+   7.6745e+06
+
+EM converged!
+
+ans =
+
+   82.9462
+   39.1177
+   66.9569
+   74.6270
+   73.4440
+   95.6109
+   82.4656
+   86.4669
+   75.1991
+   98.1796
+   33.7408
+   83.0130
+   65.3016
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2096
+    8.8335
+    0.4142
+    0.2569
+    0.0499
+    0.0259
+    0.1246
+    0.1664
+    0.4967
+    0.3225
+    9.4935
+    0.0480
+    0.1261
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021842
+precisions[0][0][1] = 0.003365
+precisions[0][0][2] = 0.015538
+precisions[0][0][3] = 0.019731
+precisions[0][0][4] = 0.044765
+precisions[0][0][5] = 0.062171
+precisions[0][0][6] = 0.028328
+precisions[0][0][7] = 0.024514
+precisions[0][0][8] = 0.014189
+precisions[0][0][9] = 0.017608
+precisions[0][0][10] = 0.003246
+precisions[0][0][11] = 0.045630
+precisions[0][0][12] = 0.028158
+means[0][0] = 82.946243
+means[0][1] = 39.117680
+means[0][2] = 66.956886
+means[0][3] = 74.626976
+means[0][4] = 73.444016
+means[0][5] = 95.610855
+means[0][6] = 82.465576
+means[0][7] = 86.466866
+means[0][8] = 75.199104
+means[0][9] = 98.179642
+means[0][10] = 33.740776
+means[0][11] = 83.013008
+means[0][12] = 65.301651
+Resolution level 2 iteration 2 deformation iterations 1
+Did one deformation step of max. 0.125 voxels in 6.5447 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 2
+Did one deformation step of max. 0.15127 voxels in 1.5941 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 3
+Did one deformation step of max. 0.051963 voxels in 1.6037 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 4
+Did one deformation step of max. 0.08141 voxels in 1.6026 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 5
+Did one deformation step of max. 0.10935 voxels in 1.628 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 6
+Did one deformation step of max. 0.12421 voxels in 1.6163 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 7
+Did one deformation step of max. 0.16505 voxels in 1.6031 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7470e+06
+
+Resolution level 2 iteration 2 deformation iterations 8
+Did one deformation step of max. 0.25909 voxels in 1.6001 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 9
+Did one deformation step of max. 0.42889 voxels in 1.618 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 10
+Did one deformation step of max. 0.17754 voxels in 3.2664 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 11
+Did one deformation step of max. 0.14216 voxels in 1.6162 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 12
+Did one deformation step of max. 0.1015 voxels in 1.6175 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 13
+Did one deformation step of max. 0.09521 voxels in 1.6276 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7469e+06
+
+Resolution level 2 iteration 2 deformation iterations 14
+Did one deformation step of max. 0.10951 voxels in 1.6149 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 15
+Did one deformation step of max. 0.095732 voxels in 1.6097 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 16
+Did one deformation step of max. 0.10602 voxels in 1.6366 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 17
+Did one deformation step of max. 0.12793 voxels in 1.6161 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 18
+Did one deformation step of max. 0.088039 voxels in 1.6105 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 19
+Did one deformation step of max. 0.1428 voxels in 1.6177 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Resolution level 2 iteration 2 deformation iterations 20
+Did one deformation step of max. 0.067445 voxels in 1.6424 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7468e+06
+
+Iteration 3 of 5
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6738e+06
+
+
+minLogLikelihood =
+
+   7.6737e+06
+
+EM converged!
+
+ans =
+
+   82.9478
+   39.0824
+   66.9645
+   74.5832
+   73.4638
+   95.6122
+   82.4593
+   86.4717
+   75.2286
+   98.1685
+   33.8302
+   83.0203
+   65.3111
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2087
+    8.7675
+    0.4085
+    0.2476
+    0.0502
+    0.0258
+    0.1241
+    0.1665
+    0.4947
+    0.3228
+    9.6671
+    0.0478
+    0.1259
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021888
+precisions[0][0][1] = 0.003377
+precisions[0][0][2] = 0.015646
+precisions[0][0][3] = 0.020095
+precisions[0][0][4] = 0.044633
+precisions[0][0][5] = 0.062282
+precisions[0][0][6] = 0.028383
+precisions[0][0][7] = 0.024510
+precisions[0][0][8] = 0.014218
+precisions[0][0][9] = 0.017602
+precisions[0][0][10] = 0.003216
+precisions[0][0][11] = 0.045731
+precisions[0][0][12] = 0.028180
+means[0][0] = 82.947792
+means[0][1] = 39.082355
+means[0][2] = 66.964500
+means[0][3] = 74.583183
+means[0][4] = 73.463753
+means[0][5] = 95.612213
+means[0][6] = 82.459343
+means[0][7] = 86.471710
+means[0][8] = 75.228577
+means[0][9] = 98.168465
+means[0][10] = 33.830250
+means[0][11] = 83.020264
+means[0][12] = 65.311073
+Resolution level 2 iteration 3 deformation iterations 1
+Did one deformation step of max. 0.125 voxels in 7.6407 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7467e+06
+
+Resolution level 2 iteration 3 deformation iterations 2
+Did one deformation step of max. 0.057592 voxels in 1.6066 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 3
+Did one deformation step of max. 0.086769 voxels in 1.6286 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 4
+Did one deformation step of max. 0.055159 voxels in 1.6049 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 5
+Did one deformation step of max. 0.037624 voxels in 1.6131 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 6
+Did one deformation step of max. 0.047553 voxels in 1.6291 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 7
+Did one deformation step of max. 0.046532 voxels in 1.6111 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 8
+Did one deformation step of max. 0.037784 voxels in 1.6 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 9
+Did one deformation step of max. 0.037986 voxels in 1.6249 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 10
+Did one deformation step of max. 0.045266 voxels in 1.6145 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 11
+Did one deformation step of max. 0.068475 voxels in 1.6013 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 12
+Did one deformation step of max. 0.043006 voxels in 1.6231 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 13
+Did one deformation step of max. 0.055425 voxels in 1.6023 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 14
+Did one deformation step of max. 0.044182 voxels in 1.6211 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 15
+Did one deformation step of max. 0.04816 voxels in 1.5947 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 16
+Did one deformation step of max. 0.064451 voxels in 1.5856 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 17
+Did one deformation step of max. 0.02242 voxels in 1.6096 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 18
+Did one deformation step of max. 0.054641 voxels in 1.5987 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 19
+Did one deformation step of max. 0.040148 voxels in 1.5947 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Resolution level 2 iteration 3 deformation iterations 20
+Did one deformation step of max. 0.024092 voxels in 1.6399 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7466e+06
+
+Iteration 4 of 5
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6736e+06
+
+
+minLogLikelihood =
+
+   7.6736e+06
+
+EM converged!
+
+ans =
+
+   82.9508
+   39.0580
+   66.9675
+   74.5487
+   73.4736
+   95.6116
+   82.4560
+   86.4739
+   75.2425
+   98.1613
+   33.8806
+   83.0252
+   65.3175
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2081
+    8.7292
+    0.4054
+    0.2428
+    0.0504
+    0.0258
+    0.1239
+    0.1666
+    0.4922
+    0.3235
+    9.7478
+    0.0477
+    0.1258
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021920
+precisions[0][0][1] = 0.003385
+precisions[0][0][2] = 0.015706
+precisions[0][0][3] = 0.020296
+precisions[0][0][4] = 0.044539
+precisions[0][0][5] = 0.062310
+precisions[0][0][6] = 0.028412
+precisions[0][0][7] = 0.024502
+precisions[0][0][8] = 0.014253
+precisions[0][0][9] = 0.017583
+precisions[0][0][10] = 0.003203
+precisions[0][0][11] = 0.045799
+precisions[0][0][12] = 0.028195
+means[0][0] = 82.950851
+means[0][1] = 39.058033
+means[0][2] = 66.967537
+means[0][3] = 74.548691
+means[0][4] = 73.473587
+means[0][5] = 95.611565
+means[0][6] = 82.456009
+means[0][7] = 86.473907
+means[0][8] = 75.242455
+means[0][9] = 98.161263
+means[0][10] = 33.880573
+means[0][11] = 83.025154
+means[0][12] = 65.317513
+Resolution level 2 iteration 4 deformation iterations 1
+Did one deformation step of max. 0.0625 voxels in 9.5099 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 2
+Did one deformation step of max. 0.047098 voxels in 1.5836 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 3
+Did one deformation step of max. 0.020663 voxels in 1.6117 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 4
+Did one deformation step of max. 0.021267 voxels in 1.5919 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 5
+Did one deformation step of max. 0.011299 voxels in 4.7813 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 6
+Did one deformation step of max. 0.00034103 voxels in 9.6735 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 7
+Did one deformation step of max. 0.00014545 voxels in 4.8032 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 8
+Did one deformation step of max. 7.2776e-05 voxels in 9.5665 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 9
+Did one deformation step of max. 1.7322e-05 voxels in 9.5918 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+Resolution level 2 iteration 4 deformation iterations 10
+Did one deformation step of max. 0 voxels in 19.3037 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+maximalDeformation is too small; stopping
+Iteration 5 of 5
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6736e+06
+
+
+minLogLikelihood =
+
+   7.6736e+06
+
+EM converged!
+
+ans =
+
+   82.9531
+   39.0466
+   66.9670
+   74.5280
+   73.4794
+   95.6117
+   82.4551
+   86.4743
+   75.2487
+   98.1566
+   33.9008
+   83.0280
+   65.3207
+
+
+ans =
+
+   1.0e+04 *
+
+    0.2078
+    8.7093
+    0.4039
+    0.2402
+    0.0505
+    0.0257
+    0.1238
+    0.1666
+    0.4907
+    0.3241
+    9.7790
+    0.0476
+    0.1257
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021937
+precisions[0][0][1] = 0.003389
+precisions[0][0][2] = 0.015736
+precisions[0][0][3] = 0.020404
+precisions[0][0][4] = 0.044479
+precisions[0][0][5] = 0.062318
+precisions[0][0][6] = 0.028419
+precisions[0][0][7] = 0.024497
+precisions[0][0][8] = 0.014276
+precisions[0][0][9] = 0.017566
+precisions[0][0][10] = 0.003198
+precisions[0][0][11] = 0.045840
+precisions[0][0][12] = 0.028202
+means[0][0] = 82.953133
+means[0][1] = 39.046574
+means[0][2] = 66.967049
+means[0][3] = 74.527985
+means[0][4] = 73.479424
+means[0][5] = 95.611725
+means[0][6] = 82.455070
+means[0][7] = 86.474289
+means[0][8] = 75.248718
+means[0][9] = 98.156624
+means[0][10] = 33.900749
+means[0][11] = 83.027946
+means[0][12] = 65.320679
+Resolution level 2 iteration 5 deformation iterations 1
+Did one deformation step of max. 0 voxels in 30.6251 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7465e+06
+
+maximalDeformation is too small; stopping
+Smoothing mesh collection with kernel size 0.000000 ...done
+numberOfImages = 1
+Image: 0
+Iteration 1 of 3
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6650e+06
+
+
+minLogLikelihood =
+
+   7.6648e+06
+
+
+minLogLikelihood =
+
+   7.6647e+06
+
+EM converged!
+
+ans =
+
+   82.9773
+   39.3035
+   66.9500
+   74.5585
+   73.5536
+   95.6020
+   82.4481
+   86.4460
+   75.5323
+   98.0632
+   34.0673
+   83.0310
+   65.3196
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0214
+    0.9250
+    0.0407
+    0.0251
+    0.0053
+    0.0027
+    0.0132
+    0.0171
+    0.0610
+    0.0344
+    1.0178
+    0.0048
+    0.0128
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021610
+precisions[0][0][1] = 0.003288
+precisions[0][0][2] = 0.015669
+precisions[0][0][3] = 0.019974
+precisions[0][0][4] = 0.043393
+precisions[0][0][5] = 0.060713
+precisions[0][0][6] = 0.027522
+precisions[0][0][7] = 0.024180
+precisions[0][0][8] = 0.012802
+precisions[0][0][9] = 0.017047
+precisions[0][0][10] = 0.003134
+precisions[0][0][11] = 0.045749
+precisions[0][0][12] = 0.027939
+means[0][0] = 82.977341
+means[0][1] = 39.303482
+means[0][2] = 66.950005
+means[0][3] = 74.558479
+means[0][4] = 73.553589
+means[0][5] = 95.602020
+means[0][6] = 82.448097
+means[0][7] = 86.446045
+means[0][8] = 75.532349
+means[0][9] = 98.063187
+means[0][10] = 34.067329
+means[0][11] = 83.031044
+means[0][12] = 65.319641
+Resolution level 3 iteration 1 deformation iterations 1
+Did one deformation step of max. 0.5 voxels in 4.5327 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7374e+06
+
+Resolution level 3 iteration 1 deformation iterations 2
+Did one deformation step of max. 0.33226 voxels in 1.4979 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7373e+06
+
+Resolution level 3 iteration 1 deformation iterations 3
+Did one deformation step of max. 0.26982 voxels in 1.5261 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7371e+06
+
+Resolution level 3 iteration 1 deformation iterations 4
+Did one deformation step of max. 0.49786 voxels in 1.5057 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 5
+Did one deformation step of max. 0.5218 voxels in 1.5228 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 6
+Did one deformation step of max. 0.00018516 voxels in 1.5233 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 7
+Did one deformation step of max. 0.0012687 voxels in 1.4819 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 8
+Did one deformation step of max. 0.0015007 voxels in 1.4943 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 9
+Did one deformation step of max. 0.003561 voxels in 1.4728 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 10
+Did one deformation step of max. 0.0056707 voxels in 1.5022 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 11
+Did one deformation step of max. 0.010274 voxels in 1.4798 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 12
+Did one deformation step of max. 0.016359 voxels in 1.4776 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 13
+Did one deformation step of max. 0.062399 voxels in 1.495 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7370e+06
+
+Resolution level 3 iteration 1 deformation iterations 14
+Did one deformation step of max. 0.059971 voxels in 1.5125 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7369e+06
+
+Resolution level 3 iteration 1 deformation iterations 15
+Did one deformation step of max. 0.1618 voxels in 1.4742 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7369e+06
+
+Resolution level 3 iteration 1 deformation iterations 16
+Did one deformation step of max. 0.19127 voxels in 1.4768 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7369e+06
+
+Resolution level 3 iteration 1 deformation iterations 17
+Did one deformation step of max. 0.13484 voxels in 1.5002 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7369e+06
+
+Resolution level 3 iteration 1 deformation iterations 18
+Did one deformation step of max. 0.13115 voxels in 1.4883 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7368e+06
+
+Resolution level 3 iteration 1 deformation iterations 19
+Did one deformation step of max. 0.12425 voxels in 1.4832 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7368e+06
+
+Resolution level 3 iteration 1 deformation iterations 20
+Did one deformation step of max. 0.088462 voxels in 1.4837 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7368e+06
+
+Iteration 2 of 3
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6607e+06
+
+
+minLogLikelihood =
+
+   7.6606e+06
+
+EM converged!
+
+ans =
+
+   82.9827
+   39.2966
+   66.9412
+   74.5338
+   73.5656
+   95.6071
+   82.4455
+   86.4472
+   75.5520
+   98.0463
+   34.0930
+   83.0343
+   65.3229
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0213
+    0.9208
+    0.0402
+    0.0249
+    0.0053
+    0.0027
+    0.0132
+    0.0170
+    0.0629
+    0.0346
+    1.0224
+    0.0048
+    0.0128
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021653
+precisions[0][0][1] = 0.003295
+precisions[0][0][2] = 0.015771
+precisions[0][0][3] = 0.020024
+precisions[0][0][4] = 0.043369
+precisions[0][0][5] = 0.060748
+precisions[0][0][6] = 0.027548
+precisions[0][0][7] = 0.024237
+precisions[0][0][8] = 0.012606
+precisions[0][0][9] = 0.016994
+precisions[0][0][10] = 0.003127
+precisions[0][0][11] = 0.045810
+precisions[0][0][12] = 0.027958
+means[0][0] = 82.982750
+means[0][1] = 39.296631
+means[0][2] = 66.941238
+means[0][3] = 74.533806
+means[0][4] = 73.565605
+means[0][5] = 95.607056
+means[0][6] = 82.445549
+means[0][7] = 86.447189
+means[0][8] = 75.552032
+means[0][9] = 98.046333
+means[0][10] = 34.093006
+means[0][11] = 83.034286
+means[0][12] = 65.322884
+Resolution level 3 iteration 2 deformation iterations 1
+Did one deformation step of max. 0.25 voxels in 5.9012 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 2
+Did one deformation step of max. 0.035515 voxels in 1.4833 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 3
+Did one deformation step of max. 0.066546 voxels in 1.5186 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 4
+Did one deformation step of max. 0.1309 voxels in 1.4928 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 5
+Did one deformation step of max. 0.090776 voxels in 1.5233 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 6
+Did one deformation step of max. 0.022961 voxels in 1.5217 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 7
+Did one deformation step of max. 0.02549 voxels in 4.4821 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 8
+Did one deformation step of max. 0.0047037 voxels in 1.4713 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 9
+Did one deformation step of max. 0.021626 voxels in 1.5115 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 10
+Did one deformation step of max. 0.012102 voxels in 1.4702 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 11
+Did one deformation step of max. 0.016627 voxels in 1.4741 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 12
+Did one deformation step of max. 0.042373 voxels in 1.4789 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 13
+Did one deformation step of max. 0.044495 voxels in 1.4793 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 14
+Did one deformation step of max. 0.075251 voxels in 1.4714 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 15
+Did one deformation step of max. 0.08056 voxels in 1.4619 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 16
+Did one deformation step of max. 0.12282 voxels in 1.4652 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7367e+06
+
+Resolution level 3 iteration 2 deformation iterations 17
+Did one deformation step of max. 0.098555 voxels in 1.4749 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7366e+06
+
+Resolution level 3 iteration 2 deformation iterations 18
+Did one deformation step of max. 0.12675 voxels in 1.466 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7366e+06
+
+Resolution level 3 iteration 2 deformation iterations 19
+Did one deformation step of max. 0.19601 voxels in 1.4697 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7366e+06
+
+Resolution level 3 iteration 2 deformation iterations 20
+Did one deformation step of max. 0.1731 voxels in 1.4812 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7366e+06
+
+Iteration 3 of 3
+numberOfLabels: 13
+Rasterizing mesh...here: 13
+here2: 13
+done
+
+minLogLikelihood =
+
+   7.6595e+06
+
+
+minLogLikelihood =
+
+   7.6594e+06
+
+EM converged!
+
+ans =
+
+   82.9852
+   39.2802
+   66.9389
+   74.5141
+   73.5718
+   95.6122
+   82.4462
+   86.4456
+   75.5688
+   98.0346
+   34.1218
+   83.0370
+   65.3265
+
+
+ans =
+
+   1.0e+05 *
+
+    0.0213
+    0.9176
+    0.0398
+    0.0247
+    0.0053
+    0.0027
+    0.0131
+    0.0170
+    0.0640
+    0.0348
+    1.0266
+    0.0048
+    0.0128
+
+numberOfClasses = 13
+numberOfImages = 1
+precisions[0][0][0] = 0.021670
+precisions[0][0][1] = 0.003301
+precisions[0][0][2] = 0.015852
+precisions[0][0][3] = 0.020104
+precisions[0][0][4] = 0.043358
+precisions[0][0][5] = 0.060798
+precisions[0][0][6] = 0.027588
+precisions[0][0][7] = 0.024246
+precisions[0][0][8] = 0.012504
+precisions[0][0][9] = 0.016958
+precisions[0][0][10] = 0.003121
+precisions[0][0][11] = 0.045856
+precisions[0][0][12] = 0.027973
+means[0][0] = 82.985168
+means[0][1] = 39.280182
+means[0][2] = 66.938919
+means[0][3] = 74.514061
+means[0][4] = 73.571777
+means[0][5] = 95.612221
+means[0][6] = 82.446182
+means[0][7] = 86.445633
+means[0][8] = 75.568848
+means[0][9] = 98.034561
+means[0][10] = 34.121754
+means[0][11] = 83.036987
+means[0][12] = 65.326515
+Resolution level 3 iteration 3 deformation iterations 1
+Did one deformation step of max. 0.125 voxels in 6.2056 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 2
+Did one deformation step of max. 0.13528 voxels in 1.5694 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 3
+Did one deformation step of max. 0.083131 voxels in 1.5298 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 4
+Did one deformation step of max. 0.13765 voxels in 1.4981 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 5
+Did one deformation step of max. 0.049488 voxels in 1.4955 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 6
+Did one deformation step of max. 0.00019427 voxels in 1.7574 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 7
+Did one deformation step of max. 0.0019358 voxels in 1.5103 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 8
+Did one deformation step of max. 0.00056284 voxels in 1.4623 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 9
+Did one deformation step of max. 0.0060577 voxels in 1.522 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 10
+Did one deformation step of max. 0.0075324 voxels in 1.4957 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 11
+Did one deformation step of max. 0.00016241 voxels in 16.4468 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 12
+Did one deformation step of max. 0.00015596 voxels in 1.4678 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 13
+Did one deformation step of max. 1.3279e-05 voxels in 16.2937 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 14
+Did one deformation step of max. 2.7805e-05 voxels in 1.5057 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 15
+Did one deformation step of max. 1.557e-05 voxels in 14.9412 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 16
+Did one deformation step of max. 1.3694e-06 voxels in 1.5075 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 17
+Did one deformation step of max. 4.8666e-06 voxels in 1.5067 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 18
+Did one deformation step of max. 3.8508e-05 voxels in 1.4919 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+Resolution level 3 iteration 3 deformation iterations 19
+Did one deformation step of max. 0 voxels in 6.0328 seconds
+
+minLogLikelihoodTimesPrior =
+
+   7.7365e+06
+
+maximalDeformation is too small; stopping
+Fitting mesh to image data mask took 780.0982 seconds
+numberOfLabels: 21
+Rasterizing mesh...here: 21
+here2: 21
+done
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Transforming points
+Careful here: the applied transformation will turn positive tetrahedra into negative ones.
+-0.492955 -0.0068293 -0.00678828
+-0.00771813 0.0669999 0.447352
+-0.00422704 -0.451572 0.0783514
+
+ determinant: -0.102187
+Starting to swap the point assignments of each tetrahedron...
+I am WriteImage and I'm running! 
+Wrote image to file image.mgz
+Constructing image-to-world transform from header information (asmr1.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd1f3f58c50)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80302645
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -0.5 0 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Offset: [43.9528, -31.8015, 9.36927]
+  Center: [0, 0, 0]
+  Translation: [43.9528, -31.8015, 9.36927]
+  Inverse: 
+    -2 -5.58794e-09 1.70003e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Singular: 0
+Constructing image-to-world transform from header information (/data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/tmp/BS_basedOn_T1/imageDump.mgz)
+Returning the following transform: 
+AffineTransform (0x7fd1f3f58c50)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80309061
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    1.01412 0.0176171 -0.0127231 
+    -0.0184392 1.08906 0.161863 
+    -0.00629357 -0.189125 1.07928 
+  Offset: [-32.7625, -39.7127, -87.7076]
+  Center: [0, 0, 0]
+  Translation: [-32.7625, -39.7127, -87.7076]
+  Inverse: 
+    0.98591 -0.0135765 0.0136586 
+    0.0154363 0.894703 -0.134 
+    0.00845407 0.156703 0.903144 
+  Singular: 0
+Transform before cropping: 
+AffineTransform (0x7fd1f3f58c50)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80309063
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2.02825 -0.0352342 0.0254463 
+    0.0125871 0.378251 -2.15855 
+    -0.0368784 2.17812 0.323726 
+  Offset: [153.431, 194.154, -15.8224]
+  Center: [0, 0, 0]
+  Translation: [153.431, 194.154, -15.8224]
+  Inverse: 
+    -0.492955 -0.0068293 -0.00678828 
+    -0.00771813 0.0669999 0.447352 
+    -0.00422704 -0.451572 0.0783514 
+  Singular: 0
+WorldToImageTransform before cropping: 
+AffineTransform (0x7fd1f3f57930)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80309065
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2 -5.58794e-09 1.70003e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Offset: [87.9056, 18.7385, 63.6029]
+  Center: [0, 0, 0]
+  Translation: [87.9056, 18.7385, 63.6029]
+  Inverse: 
+    -0.5 -1.9082e-17 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Singular: 0
+ m_BoundingBoxSize: [65, 55,93]
+ minimalMappedCoordinate: [21.7201, -4.43329,-18.1826]
+ maximalMappedCoordinate: [155.772, 215.385,131.579]
+Cropping with min [8  -26  -33]
+          and max [169  238  147]
+m_OriginalImageRegion before checking margins: ImageRegion (0x7fd3019e52f8)
+  Dimension: 3
+  Index: [8, -26, -33]
+  Size: [162, 265, 181]
+
+m_CroppedImageRegion before checking margins: ImageRegion (0x7fd3019e52c0)
+  Dimension: 3
+  Index: [0, 0, 0]
+  Size: [162, 265, 181]
+
+
+m_OriginalImageRegion after checking margins: ImageRegion (0x7fd3019e52f8)
+  Dimension: 3
+  Index: [8, 0, 0]
+  Size: [162, 216, 144]
+
+m_CroppedImageRegion after checking margins: ImageRegion (0x7fd3019e52c0)
+  Dimension: 3
+  Index: [0, 26, 33]
+  Size: [162, 216, 144]
+
+Transform after cropping: 
+AffineTransform (0x7fd1f3f58c50)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80315481
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2.02825 -0.0352342 0.0254463 
+    0.0125871 0.378251 -2.15855 
+    -0.0368784 2.17812 0.323726 
+  Offset: [145.431, 220.154, 17.1776]
+  Center: [0, 0, 0]
+  Translation: [145.431, 220.154, 17.1776]
+  Inverse: 
+    -0.492955 -0.0068293 -0.00678828 
+    -0.00771813 0.0669999 0.447352 
+    -0.00422704 -0.451572 0.0783514 
+  Singular: 0
+WorldToImageTransform after cropping: 
+AffineTransform (0x7fd1f3f57930)
+  RTTI typeinfo:   itk::AffineTransform<double, 3u>
+  Reference Count: 1
+  Modified Time: 80315482
+  Debug: Off
+  Object Name: 
+  Observers: 
+    none
+  Matrix: 
+    -2 -5.58794e-09 1.70003e-16 
+    -1.86265e-09 5.96046e-08 -2 
+    -1.39698e-09 2 -5.96046e-08 
+  Offset: [79.9056, 44.7385, 96.6029]
+  Center: [0, 0, 0]
+  Translation: [79.9056, 44.7385, 96.6029]
+  Inverse: 
+    -0.5 -1.9082e-17 -1.39698e-09 
+    -3.49246e-10 -1.49012e-08 0.5 
+    4.65661e-10 -0.5 1.49012e-08 
+  Singular: 0
+I am WriteImage and I'm running! 
+Wrote image to file asmr2.mgz
+This file does not contain MRI parameters
+This file does not contain MRI parameters
+numberOfLabels: 21
+Rasterizing mesh...here: 21
+here2: 21
+done
+mri_convert.bin discreteLabels.mgz discreteLabelsResampledT1.mgz -rt nearest -odt float -rl /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/mri/norm.mgz 
+$Id: mri_convert.c,v 1.226 2016/02/26 16:15:24 mreuter Exp $
+reading from discreteLabels.mgz...
+TR=2300.00, TE=0.00, TI=0.00, flip angle=0.00
+i_ras = (-1, -6.98492e-10, 9.31323e-10)
+j_ras = (0, -2.98023e-08, -1)
+k_ras = (-2.79397e-09, 1, 2.98023e-08)
+reading template info from volume /data/MOTUS/Folder_lou/parcellation_V2/output/MOT01/mri/norm.mgz...
+Reslicing using nearest 
+writing to discreteLabelsResampledT1.mgz...
+Everything done!
+It took 897.1835 seconds 
